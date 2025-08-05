@@ -1,0 +1,90 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <title>Suggest Outfit</title>
+</head>
+<body>
+{#   {% extends "base.html" %}#}
+{#{% load static %}#}
+{##}
+{#{% block content %}#}
+{#<div class="container my-5">#}
+{#    <h2 class="mb-4">Your Suggested Outfit</h2>#}
+{##}
+{#    <form method="get" class="mb-4">#}
+{#        <div class="input-group">#}
+{#            <input type="text" class="form-control" name="q" placeholder="Describe your occasion (e.g. elegant outfit for party)" value="{{ request.GET.q }}">#}
+{#            <button class="btn btn-primary" type="submit">Suggest</button>#}
+{#        </div>#}
+{#    </form>#}
+{##}
+{#    {% if outfit_combos %}#}
+{#        <div class="row row-cols-1 row-cols-md-2 g-4">#}
+{#            {% for score, combo in outfit_combos %}#}
+{#                <div class="col">#}
+{#                    <div class="card shadow-sm">#}
+{#                        <div class="card-header">#}
+{#                            <strong>Match Score:</strong> {{ score|floatformat:2 }}#}
+{#                        </div>#}
+{#                        <div class="card-body d-flex flex-wrap justify-content-center">#}
+{#                            {% for item in combo %}#}
+{#                                <div class="m-2" style="width: 180px;">#}
+{#                                    <img src="{{ item.image.url }}" class="img-fluid rounded" alt="item">#}
+{#                                    <p class="mt-2 mb-0 small"><strong>{{ item.predicted_style }}</strong></p>#}
+{#                                    <p class="text-muted small">{{ item.description|truncatewords:12 }}</p>#}
+{#                                </div>#}
+{#                            {% endfor %}#}
+{#                        </div>#}
+{#                    </div>#}
+{#                </div>#}
+{#            {% endfor %}#}
+{#        </div>#}
+{#    {% else %}#}
+{#        <p class="text-muted mt-4">No outfits found. Try uploading more clothes in your wardrobe.</p>#}
+{#    {% endif %}#}
+{#</div>#}
+{#{% endblock %}#}
+
+{% extends 'base.html' %}
+
+{% block content %}
+<div class="container mt-4">
+    <h2>Suggested Outfits</h2>
+
+    <form method="get" class="mb-3">
+        <div class="input-group">
+            <input type="text" class="form-control" name="q" placeholder="e.g. elegant outfit for party" value="{{ request.GET.q }}">
+            <button class="btn btn-primary" type="submit">Suggest</button>
+        </div>
+    </form>
+
+    <div class="mb-3">
+        <a href="{% url 'wardrobe' %}" class="btn btn-outline-secondary">Back to Wardrobe</a>
+    </div>
+
+    {% if outfit_combos %}
+        {% for score, combo in outfit_combos %}
+            <div class="card mb-3">
+                <div class="card-header">Score: {{ score|floatformat:2 }}</div>
+                <div class="card-body">
+                    <div class="row">
+                        {% for item in combo %}
+                        <div class="col-md-2 text-center">
+                            <img src="{{ item.image.url }}" class="img-fluid rounded">
+                            <p class="mt-2 small"><strong>{{ item.category }}</strong></p>
+                        </div>
+                        {% endfor %}
+                    </div>
+                </div>
+            </div>
+        {% endfor %}
+    {% else %}
+        <p>No outfits matched your query.</p>
+    {% endif %}
+</div>
+{% endblock %}
+
+
+</body>
+</html>

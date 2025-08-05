@@ -1,0 +1,35 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <title>Home</title>
+</head>
+<body>
+{% extends "base.html" %}
+{% load static %}
+
+{% block content %}
+<div class="container">
+    <div class="row align-items-center justify-content-center min-vh-75">
+        <div class="col-md-6 text-start">
+            <h1 class="display-5 fw-bold">Welcome to<br><span class="text-primary">Fashion Assistant</span></h1>
+            <p class="lead mt-3">
+                Discover your style.<br>
+                Get personalized outfit recommendations powered by AI.<br>
+                Start your fashion journey now!
+            </p>
+            {% if user.is_authenticated %}
+                <a href="{% url 'profile' %}" class="btn btn-primary mt-4">Go to Profile</a>
+            {% else %}
+                <a href="{% url 'register' %}" class="btn btn-primary mt-4">Get Started</a>
+            {% endif %}
+        </div>
+        <div class="col-md-6 text-center">
+            <img src="{% static 'images/fashion-illustration.jpg' %}" class="img-fluid" alt="Fashion" style="max-height: 460px;">
+        </div>
+    </div>
+</div>
+{% endblock %}
+
+</body>
+</html>

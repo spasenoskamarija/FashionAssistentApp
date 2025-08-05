@@ -1,0 +1,167 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <title>Profile</title>
+    <style>
+        .carousel-control-prev-icon,
+        .carousel-control-next-icon {
+            background-image: none;
+            background-color: rgba(0, 0, 0, 0.6);
+            border-radius: 50%;
+            width: 40px;
+            height: 40px;
+        }
+
+        .carousel-control-prev-icon::after {
+            font-size: 24px;
+            color: white;
+        }
+
+        .carousel-control-next-icon::after {
+            font-size: 24px;
+            color: white;
+        }
+
+    </style>
+</head>
+<body>
+{% extends 'base.html' %}
+{% block content %}
+<div class="container mt-4">
+    <h2>Profile</h2>
+
+    <div class="row">
+        <!-- Лева колона: Add Outfit формата -->
+        <div class="col-md-6">
+            <div class="card p-4 shadow-sm">
+                <h4 class="mb-3">Add Outfit</h4>
+                <form method="post" enctype="multipart/form-data">
+                    {% csrf_token %}
+                    <div class="mb-3">
+                        <label class="form-label">Image:</label>
+                        {{ outfit_form.image }}
+                    </div>
+                    <div class="mb-3">
+                        <label class="form-label">Rating (0–5):</label>
+                        {{ outfit_form.rating }}
+                    </div>
+                    <div class="form-check mb-3">
+                        {{ outfit_form.favorite }}
+                        <label class="form-check-label ms-1">Favorite</label>
+                    </div>
+                    <button type="submit" class="btn btn-primary w-100">Add Outfit</button>
+                </form>
+    
+                <div class="d-flex justify-content-between mt-4">
+                    <a href="{% url 'wardrobe' %}" class="btn btn-outline-dark">Go to Wardrobe</a>
+                    <a href="{% url 'suggest_outfit' %}" class="btn btn-outline-primary">Suggest Outfit</a>
+                </div>
+            </div>
+        </div>
+    
+        <!-- Десна колона: Style Chart -->
+        <div class="col-md-6">
+            <div class="card p-4 shadow-sm">
+                <h5 class="text-center">🎨 Style Distribution</h5>
+                <canvas id="styleChart" width="300" height="300"></canvas>
+            </div>
+        </div>
+    </div>
+
+
+
+    <!-- Favorite Outfits -->
+    <h4 class="mt-5">Favorite Outfits:</h4>
+    {% if favorites %}
+    <div id="favCarousel" class="carousel slide" data-bs-ride="carousel">
+        <div class="carousel-inner text-center">
+            {% for outfit in favorites %}
+            <div class="carousel-item {% if forloop.first %}active{% endif %}">
+                <img src="{{ outfit.image.url }}" class="d-block mx-auto" style="height: 500px; object-fit: contain;">
+                <div class="mt-2">
+                    <p><strong>{{ outfit.predicted_style }}</strong></p>
+                    <p>Rating: {{ outfit.rating }} ⭐</p>
+                    <a href="{% url 'toggle_favorite' outfit.id %}" class="btn btn-warning btn-sm">Unfavorite</a>
+                    <a href="{% url 'delete_outfit' outfit.id %}" class="btn btn-danger btn-sm">Delete</a>
+                </div>
+            </div>
+            {% endfor %}
+        </div>
+        <button class="carousel-control-prev" type="button" data-bs-target="#favCarousel" data-bs-slide="prev">
+            <span class="carousel-control-prev-icon"></span>
+        </button>
+        <button class="carousel-control-next" type="button" data-bs-target="#favCarousel" data-bs-slide="next">
+            <span class="carousel-control-next-icon"></span>
+        </button>
+    </div>
+    {% else %}
+    <p class="text-muted">No favorite outfits yet.</p>
+    {% endif %}
+
+    <!-- Non-Favorite Outfits -->
+    <h4 class="mt-5">Other Outfits:</h4>
+    {% if non_favorites %}
+    <div id="nonFavCarousel" class="carousel slide" data-bs-ride="carousel">
+        <div class="carousel-inner text-center">
+            {% for outfit in non_favorites %}
+            <div class="carousel-item {% if forloop.first %}active{% endif %}">
+                <img src="{{ outfit.image.url }}" class="d-block mx-auto" style="height: 500px; object-fit: contain;">
+                <div class="mt-2">
+                    <p><strong>{{ outfit.predicted_style }}</strong></p>
+                    <p>Rating: {{ outfit.rating }} ⭐</p>
+                    <a href="{% url 'toggle_favorite' outfit.id %}" class="btn btn-success btn-sm">Favorite</a>
+                    <a href="{% url 'delete_outfit' outfit.id %}" class="btn btn-danger btn-sm">Delete</a>
+                </div>
+            </div>
+            {% endfor %}
+        </div>
+        <button class="carousel-control-prev" type="button" data-bs-target="#nonFavCarousel" data-bs-slide="prev">
+            <span class="carousel-control-prev-icon"></span>
+        </button>
+        <button class="carousel-control-next" type="button" data-bs-target="#nonFavCarousel" data-bs-slide="next">
+            <span class="carousel-control-next-icon"></span>
+        </button>
+    </div>
+    {% else %}
+    <p class="text-muted">No other outfits yet.</p>
+    {% endif %}
+</div>
+
+</div>
+    <script src="https://cdn.jsdelivr.net/npm/chart.js"></script>
+<script>
+    const ctx = document.getElementById('styleChart').getContext('2d');
+    const styleChart = new Chart(ctx, {
+        type: 'pie',
+        data: {
+            labels: {{ chart_labels|safe }},
+            datasets: [{
+                data: {{ chart_data|safe }},
+                backgroundColor: [
+                    '#7F56D9', '#D6BBFB', '#F4EBFF', '#A78BFA', '#C084FC', '#DDD6FE'
+                ],
+                borderColor: '#fff',
+                borderWidth: 2
+            }]
+        },
+        options: {
+            responsive: true,
+            plugins: {
+                legend: {
+                    position: 'bottom',
+                    labels: {
+                        color: '#333',
+                        font: {
+                            family: 'Poppins',
+                            size: 14
+                        }
+                    }
+                }
+            }
+        }
+    });
+</script>
+{% endblock %}
+</body>
+</html>

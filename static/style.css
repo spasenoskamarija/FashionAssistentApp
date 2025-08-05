@@ -1,0 +1,111 @@
+/* Main background and text */
+body {
+    margin: 0;
+    padding: 0;
+    font-family: 'Segoe UI', sans-serif;
+    background-color: #f6f7f9;
+    color: #333;
+}
+
+/* Container for all content */
+.container {
+    max-width: 1000px;
+    margin: 0 auto;
+    padding: 40px 20px;
+    background-color: #ffffff;
+    box-shadow: 0 4px 20px rgba(0,0,0,0.05);
+    border-radius: 12px;
+}
+
+/* Header and navigation bar */
+header {
+    background-color: #ffffff;
+    padding: 20px 40px;
+    border-bottom: 1px solid #e0e0e0;
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+}
+
+header h1 {
+    font-size: 24px;
+    color: #3a3a3a;
+}
+
+nav ul {
+    list-style: none;
+    margin: 0;
+    padding: 0;
+    display: flex;
+    gap: 20px;
+}
+
+nav ul li {
+    display: inline;
+}
+
+nav ul li a {
+    text-decoration: none;
+    color: #555;
+    font-weight: 500;
+    transition: color 0.3s ease;
+}
+
+nav ul li a:hover {
+    color: #0077cc;
+}
+
+/* Main heading */
+h2 {
+    font-size: 36px;
+    margin-top: 0;
+    margin-bottom: 10px;
+    color: #222;
+}
+
+/* Subtext */
+p {
+    font-size: 16px;
+    line-height: 1.6;
+}
+
+/* Profile link */
+a {
+    color: #6b4eff;
+    text-decoration: none;
+}
+
+a:hover {
+    text-decoration: underline;
+}
+
+/* Image styling */
+img {
+    max-width: 100%;
+    height: auto;
+    border-radius: 8px;
+    margin-top: 20px;
+}
+
+/* Footer */
+footer {
+    text-align: center;
+    font-size: 14px;
+    color: #999;
+    margin-top: 40px;
+    padding: 20px 0;
+    border-top: 1px solid #eee;
+}
+
+/* Responsive layout */
+@media (max-width: 768px) {
+    header {
+        flex-direction: column;
+        align-items: flex-start;
+    }
+
+    nav ul {
+        flex-direction: column;
+        gap: 10px;
+    }
+}
