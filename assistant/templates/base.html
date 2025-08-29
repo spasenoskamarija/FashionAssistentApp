@@ -1,124 +1,94 @@
+
 {#<!DOCTYPE html>#}
 {#<html lang="en">#}
 {#<head>#}
 {#    <meta charset="UTF-8">#}
 {#    <title>Fashion Assistant</title>#}
 {#    <meta name="viewport" content="width=device-width, initial-scale=1">#}
-{#    <!-- Bootstrap 5 CDN -->#}
+{#    <!-- Bootstrap + Google Fonts -->#}
 {#    <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.0/dist/css/bootstrap.min.css" rel="stylesheet">#}
 {#    <link href="https://fonts.googleapis.com/css2?family=Poppins:wght@400;600&display=swap" rel="stylesheet">#}
-{#   <style>#}
-{#    html, body {#}
-{#        height: 100%;#}
-{#        margin: 0;#}
-{#        font-family: 'Poppins', sans-serif;#}
-{#        background-color: #fdfcfc;#}
-{#        color: #333;#}
-{#    }#}
 {##}
-{#    body {#}
-{#        display: flex;#}
-{#        flex-direction: column;#}
-{#    }#}
+{#    <style>#}
+{#        :root {#}
+{#            --primary: #7F56D9;#}
+{#            --secondary: #F4EBFF;#}
+{#            --accent: #D6BBFB;#}
+{#            --text-dark: #1D1D1F;#}
+{#            --text-muted: #6B7280;#}
+{#        }#}
 {##}
-{#    main {#}
-{#        flex: 1;#}
-{#        display: flex;#}
-{#        flex-direction: column;#}
-{#        justify-content: center;#}
-{#    }#}
+{#        html, body {#}
+{#            margin: 0;#}
+{#            padding: 0;#}
+{#            height: 100%;#}
+{#            font-family: 'Poppins', sans-serif;#}
+{#            background: linear-gradient(to right, var(--secondary), #fff);#}
+{#            color: var(--text-dark);#}
+{#            display: flex;#}
+{#            flex-direction: column;#}
+{#        }#}
 {##}
-{#    nav {#}
-{#        background-color: #227187;#}
-{#    }#}
+{#        nav {#}
+{#            background-color: var(--primary);#}
+{#            padding: 10px 0;#}
+{#        }#}
 {##}
-{#    .navbar-brand {#}
-{#        font-weight: 600;#}
-{#        color: #FFC5F3 !important;#}
-{#        font-size: 24px;#}
-{#    }#}
-{##}
-{#    .nav-link {#}
-{#        color: #FFC5F3 !important;#}
-{#        font-weight: 500;#}
-{#        transition: color 0.3s;#}
-{#        position: relative;#}
-{#    }#}
-{##}
-{#    .navbar .btn-link {#}
-{#        padding: 0.5rem 1rem;#}
-{#        color: #C7AA60;#}
-{#        font-size: 1rem;#}
-{#        text-decoration: none;#}
-{#        line-height: 1.5;#}
-{#    }#}
-{##}
-{#    .nav-link:hover,#}
-{#    .nav-link:focus {#}
-{#        color: #C383DD !important;#}
-{#    }#}
-{##}
-{#    .btn-primary {#}
-{#        background-color: #C383DD;#}
-{#        border: none;#}
-{#        padding: 12px 30px;#}
-{#        font-size: 16px;#}
-{#        border-radius: 25px;#}
-{#        color: #fff;#}
-{#        transition: background-color 0.3s, transform 0.2s;#}
-{#    }#}
-{##}
-{#    .btn-primary:hover {#}
-{#        background-color: #a369c0;#}
-{#        transform: translateY(-2px);#}
-{#    }#}
-{##}
-{#    footer {#}
-{#        background-color: #227187;#}
-{#        color: #FFC5F3;#}
-{#        padding: 20px 0;#}
-{#        text-align: center;#}
-{#        flex-shrink: 0;#}
-{#        font-size: 14px;#}
-{#    }#}
-{##}
-{#    h1, h2, h3 {#}
-{#        font-weight: 600;#}
-{#        color: #227187;#}
-{#    }#}
-{##}
-{#    .btn-link {#}
-{#        font-weight: 500;#}
-{#        color: #FFC5FD !important;#}
-{#    }#}
-{##}
-{#    .btn-link:hover {#}
-{#        color: #FFC5F3 !important;#}
-{#        text-decoration: underline;#}
-{#    }#}
-{##}
-{#    /* Responsive tweaks */#}
-{#    @media (max-width: 768px) {#}
 {#        .navbar-brand {#}
-{#            font-size: 20px;#}
+{#            color: white !important;#}
+{#            font-weight: 600;#}
+{#            font-size: 1.5rem;#}
 {#        }#}
 {##}
 {#        .nav-link {#}
-{#            font-size: 16px;#}
+{#            color: var(--accent) !important;#}
+{#            font-weight: 500;#}
+{#            transition: all 0.3s ease;#}
 {#        }#}
-{#    }#}
-{#</style>#}
+{##}
+{#        .nav-link:hover {#}
+{#            color: white !important;#}
+{#            transform: translateY(-1px);#}
+{#        }#}
+{##}
+{#        .btn-primary {#}
+{#            background-color: var(--primary);#}
+{#            border: none;#}
+{#            color: white;#}
+{#            border-radius: 25px;#}
+{#            padding: 10px 25px;#}
+{#            transition: all 0.3s ease;#}
+{#        }#}
+{##}
+{#        .btn-primary:hover {#}
+{#            background-color: #6b46c1;#}
+{#            transform: scale(1.05);#}
+{#        }#}
+{##}
+{#        main {#}
+{#            flex: 1;#}
+{#            padding: 40px 20px;#}
+{#        }#}
+{##}
+{#        footer {#}
+{#            background-color: var(--primary);#}
+{#            color: var(--accent);#}
+{#            padding: 15px 0;#}
+{#            text-align: center;#}
+{#            font-size: 0.9rem;#}
+{#        }#}
+{#    </style>#}
 {#    {% load static %}#}
 {#</head>#}
 {#<body>#}
 {##}
 {#<!-- Navbar -->#}
-{#<nav class="navbar navbar-expand-lg fixed-top shadow-sm">#}
+{#<nav class="navbar navbar-expand-lg shadow-sm">#}
 {#    <div class="container">#}
 {#        <a class="navbar-brand" href="{% url 'home' %}">Fashion Assistant</a>#}
 {#        <button class="navbar-toggler" type="button" data-bs-toggle="collapse" data-bs-target="#navbarNav"#}
 {#                aria-controls="navbarNav" aria-expanded="false" aria-label="Toggle navigation">#}
-{#            <span class="navbar-toggler-icon" style="filter: invert(100%);"></span>#}
+{#            <span class="navbar-toggler-icon" style="filter: invert(100%)"></span>#}
 {#        </button>#}
 {#        <div class="collapse navbar-collapse" id="navbarNav">#}
 {#            <ul class="navbar-nav ms-auto d-flex align-items-center">#}
@@ -129,13 +99,9 @@
 {#                    <li class="nav-item">#}
 {#                        <form method="post" action="{% url 'logout' %}" class="d-inline">#}
 {#                            {% csrf_token %}#}
-{#                            <button type="submit" class="nav-link btn btn-link p-0">#}
-{#                                Logout#}
-{#                            </button>#}
+{#                            <button type="submit" class="nav-link btn btn-link">Logout</button>#}
 {#                        </form>#}
 {#                    </li>#}
-{##}
-{##}
 {#                {% else %}#}
 {#                    <li class="nav-item">#}
 {#                        <a class="nav-link" href="{% url 'login' %}">Login</a>#}
@@ -156,142 +122,708 @@
 {##}
 {#<footer>#}
 {#    <div class="container">#}
-{#        <p>&copy; 2025 Fashion Assistant. All rights reserved.</p>#}
+{#        &copy; 2025 Fashion Assistant. All rights reserved.#}
 {#    </div>#}
 {#</footer>#}
 {##}
-{#<!-- Bootstrap JS CDN -->#}
 {#<script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.0/dist/js/bootstrap.bundle.min.js"></script>#}
+{#</body>#}
+{#</html>#}
+
+{#<!DOCTYPE html>#}
+{#<html lang="en">#}
+{#<head>#}
+{#    <meta charset="UTF-8">#}
+{#    <title>Fashion Assistant</title>#}
+{#    <meta name="viewport" content="width=device-width, initial-scale=1">#}
+{#    {% load static %}#}
+{#    <!-- Bootstrap + Google Fonts -->#}
+{#    <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.0/dist/css/bootstrap.min.css" rel="stylesheet">#}
+{#    <link href="https://fonts.googleapis.com/css2?family=Poppins:wght@400;600;800&display=swap" rel="stylesheet">#}
+{##}
+{# <style>#}
+{#    :root {#}
+{#        --primary: #14213D;#}
+{#        --accent: #264653;#}
+{#        --text-muted: #6B7280;#}
+{#    }#}
+{##}
+{#    html, body {#}
+{#        height: 100%;#}
+{#        margin: 0;#}
+{#        padding: 0;#}
+{#        font-family: 'Poppins', sans-serif;#}
+{#        background: linear-gradient(140deg, #FFF4E6 30%, #FFEADC 20%, #FFF8F0 60%);#}
+{#    }#}
+{##}
+{##}
+{#    body {#}
+{#        display: flex;#}
+{#        flex-direction: column;#}
+{#        min-height: 100vh;#}
+{#    }#}
+{##}
+{#    /* Navbar */#}
+{#   nav.navbar {#}
+{#       background-color: rgb(249, 250, 251);#}
+{#       backdrop-filter: blur(6px);#}
+{#       padding: 10px 0;#}
+{#       box-shadow: 0 2px 8px rgba(0, 0, 0, 0.05);#}
+{#       border-bottom: 1px solid rgba(0, 0, 0, 0.05);#}
+{#       position: sticky;#}
+{#       top: 0;#}
+{#       z-index: 1000;#}
+{#   }#}
+{##}
+{#    .navbar-brand {#}
+{#        font-weight: 800;#}
+{#        font-size: 1.8rem;#}
+{#        color: var(--primary) !important;#}
+{#    }#}
+{##}
+{#    .nav-link {#}
+{#        color: var(--primary) !important;#}
+{#        font-weight: 500;#}
+{#        margin-left: 25px;#}
+{#        transition: color 0.3s ease;#}
+{#    }#}
+{##}
+{#    .nav-link:hover {#}
+{#        color: var(--accent) !important;#}
+{#    }#}
+{##}
+{#    .btn-accent {#}
+{#        background-color: var(--accent);#}
+{#        border: none;#}
+{#        border-radius: 25px;#}
+{#        padding: 8px 22px;#}
+{#        font-weight: 500;#}
+{#        color: white !important;#}
+{#        transition: background-color 0.3s ease;#}
+{#        text-decoration: none;#}
+{#    }#}
+{##}
+{#    .btn-accent:hover {#}
+{#        background-color: #1b2f38;#}
+{#        text-decoration: none;#}
+{#    }#}
+{##}
+{#    /* Main content spacing */#}
+{#    main {#}
+{#        flex: 1;#}
+{#        padding: 40px 20px;#}
+{#    }#}
+{##}
+{#    /* Footer */#}
+{#    footer {#}
+{#        background-color: #f9fafb;#}
+{#        color: var(--text-muted);#}
+{#        padding: 15px 0;#}
+{#        text-align: center;#}
+{#        font-size: 0.9rem;#}
+{#        border-top: 1px solid #e5e7eb;#}
+{#    }#}
+{#</style>#}
+{##}
+{#</head>#}
+{#<body>#}
+{##}
+{#<!-- Navbar -->#}
+{#<nav class="navbar navbar-expand-lg">#}
+{#    <div class="container">#}
+{#        <a class="navbar-brand" href="{% url 'home' %}" style="font-family: Calibri">Fashion Assistant</a>#}
+{#        <button class="navbar-toggler" type="button" data-bs-toggle="collapse" data-bs-target="#navbarNav"#}
+{#                aria-controls="navbarNav" aria-expanded="false" aria-label="Toggle navigation">#}
+{#            <span class="navbar-toggler-icon" style="filter: invert(100%)"></span>#}
+{#        </button>#}
+{#        <div class="collapse navbar-collapse" id="navbarNav">#}
+{#            <ul class="navbar-nav ms-auto d-flex align-items-center">#}
+{#                {% if user.is_authenticated %}#}
+{#                    <li class="nav-item">#}
+{#                        <a class="nav-link" href="{% url 'profile' %}">Profile</a>#}
+{#                    </li>#}
+{#                    <li class="nav-item">#}
+{#                        <form method="post" action="{% url 'logout' %}" class="d-inline">#}
+{#                            {% csrf_token %}#}
+{#                            <button type="submit" class="btn-accent ms-2">Logout</button>#}
+{#                        </form>#}
+{#                    </li>#}
+{#                {% else %}#}
+{#                    <li class="nav-item">#}
+{#                        <a class="nav-link" href="{% url 'login' %}">Login</a>#}
+{#                    </li>#}
+{#                    <li class="nav-item">#}
+{#                        <a class="btn-accent ms-2" href="{% url 'register' %}">Register</a>#}
+{#                    </li>#}
+{#                {% endif %}#}
+{#            </ul>#}
+{#        </div>#}
+{#    </div>#}
+{#</nav>#}
+{##}
+{#<!-- Main content -->#}
+{#<main>#}
+{#    {% block content %}#}
+{#    {% endblock %}#}
+{#</main>#}
+{##}
+{#<!-- Footer -->#}
+{#<footer>#}
+{#    &copy; 2025 Fashion Assistant. All rights reserved.#}
+{#</footer>#}
+{##}
+{#<script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.0/dist/js/bootstrap.bundle.min.js"></script>#}
+{#</body>#}
+{#</html>#}
+
+{#<!DOCTYPE html>#}
+{#<html lang="en">#}
+{#<head>#}
+{#    <meta charset="UTF-8">#}
+{#    <title>Fashion Assistant</title>#}
+{#    <meta name="viewport" content="width=device-width, initial-scale=1">#}
+{#    {% load static %}#}
+{#    <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.0/dist/css/bootstrap.min.css" rel="stylesheet">#}
+{#    <link href="https://fonts.googleapis.com/css2?family=Poppins:wght@400;600;800&display=swap" rel="stylesheet">#}
+{##}
+{#    <style>#}
+{#        :root {#}
+{#            --primary: #14213D;#}
+{#            --accent: #264653;#}
+{#            --text-muted: #6B7280;#}
+{#            --background-light: linear-gradient(140deg, #FFF4E6 30%, #FFEADC 20%, #FFF8F0 60%);#}
+{#            --background-dark: linear-gradient(140deg, #1a1a1a 30%, #121212 70%);#}
+{#        }#}
+{##}
+{#        html, body {#}
+{#            height: 100%;#}
+{#            margin: 0;#}
+{#            padding: 0;#}
+{#            font-family: 'Poppins', sans-serif;#}
+{#            background: var(--background-light);#}
+{#        }#}
+{##}
+{#        body {#}
+{#            display: flex;#}
+{#            flex-direction: column;#}
+{#            min-height: 100vh;#}
+{#        }#}
+{##}
+{#        /* Brand wrapper */#}
+{#        .brand {#}
+{#          display: inline-flex;#}
+{#          align-items: center;#}
+{#          gap: 10px;#}
+{#          text-decoration: none;#}
+{#        }#}
+{##}
+{##}
+{#        /* Wordmark */#}
+{#        .brand-name {#}
+{#          font-weight: 800;#}
+{#          letter-spacing: .2px;#}
+{#          color: #0f172a;                     /* темна сина/сива */#}
+{#        }#}
+{##}
+{#        /* На ховер лесна анимација */#}
+{#        .brand:hover .brand-logo { transform: translateY(-1px); }#}
+{#        .brand-logo { transition: transform .2s ease; }#}
+{##}
+{#        /* На мобилен можеш да го криеш името и да оставиш само лого */#}
+{#        @media (max-width: 640px){#}
+{#          .brand-name { display: none; }#}
+{#        }#}
+{##}
+{##}
+{#        nav.navbar {#}
+{#            background-color: rgb(249, 250, 251);#}
+{#            backdrop-filter: blur(6px);#}
+{#            padding: 10px 0;#}
+{#            box-shadow: 0 2px 8px rgba(0, 0, 0, 0.05);#}
+{#            border-bottom: 1px solid rgba(0, 0, 0, 0.05);#}
+{#            position: sticky;#}
+{#            top: 0;#}
+{#            z-index: 1000;#}
+{#        }#}
+{##}
+{#        .navbar-brand {#}
+{#            font-weight: 800;#}
+{#            font-size: 1.8rem;#}
+{#            color: var(--primary) !important;#}
+{#            font-family: Calibri;#}
+{#        }#}
+{##}
+{#        .nav-link {#}
+{#            color: var(--primary) !important;#}
+{#            font-weight: 500;#}
+{#            margin-left: 25px;#}
+{#            transition: color 0.3s ease;#}
+{#        }#}
+{##}
+{#        .nav-link:hover {#}
+{#            color: var(--accent) !important;#}
+{#        }#}
+{##}
+{#        .btn-accent{#}
+{#          background:#C68B59; color:#fff; border:none;#}
+{#          border-radius:999px; padding:8px 18px; font-weight:600;#}
+{#          transition:all .25s ease;#}
+{#        }#}
+{#        .btn-accent:hover{ background:#A97142; text-decoration: none }#}
+{##}
+{#        .btn-outline-primary{#}
+{#          border:2px solid #C68B59; color:#C68B59;#}
+{#          border-radius:999px; padding:8px 18px; font-weight:600;#}
+{#          transition:all .25s ease; background:transparent;#}
+{#        }#}
+{#        .btn-outline-primary:hover{ background:#C68B59; color:#fff; }#}
+{##}
+{#        /* For red delete pills on cards */#}
+{#        .btn-outline-danger{#}
+{#          border:2px solid #dc3545; color:#dc3545;#}
+{#          border-radius:999px; padding:6px 14px; font-weight:600;#}
+{#          transition:all .25s ease; background:transparent;#}
+{#        }#}
+{#        .btn-outline-danger:hover{ background:#dc3545; color:#fff; }#}
+{##}
+{##}
+{#        main {#}
+{#            flex: 1;#}
+{#            padding: 40px 20px;#}
+{#        }#}
+{##}
+{#        footer {#}
+{#            background-color: #f9fafb;#}
+{#            color: var(--text-muted);#}
+{#            padding: 15px 0;#}
+{#            text-align: center;#}
+{#            font-size: 0.9rem;#}
+{#            border-top: 1px solid #e5e7eb;#}
+{#        }#}
+{##}
+{#        /* Dark Mode Styles */#}
+{#        body.dark-mode, html.dark-mode {#}
+{#            background: var(--background-dark) !important;#}
+{#            color: #f0f0f0;#}
+{#        }#}
+{##}
+{#        .dark-mode nav.navbar {#}
+{#            background-color: #1c1c1c !important;#}
+{#            border-bottom: 1px solid #333;#}
+{#        }#}
+{##}
+{#        .dark-mode .nav-link {#}
+{#            color: #f0f0f0 !important;#}
+{#        }#}
+{##}
+{#        .dark-mode .btn-accent {#}
+{#            background-color: #3B82F6;#}
+{#        }#}
+{##}
+{#        .dark-mode footer {#}
+{#            background-color: #111 !important;#}
+{#            color: #f0f0f0 !important;#}
+{#            border-top: 1px solid #333 !important;#}
+{#        }#}
+{##}
+{#        .dark-mode .card {#}
+{#            background-color: #1f1f1f !important;#}
+{#            border: 1px solid #333;#}
+{#        }#}
+{##}
+{#        .dark-mode .btn,#}
+{#        .dark-mode .form-control {#}
+{#            background-color: #2a2a2a;#}
+{#            color: #f0f0f0;#}
+{#            border-color: #444;#}
+{#        }#}
+{##}
+{#        .dark-mode .btn:hover {#}
+{#            background-color: #3B82F6;#}
+{#        }#}
+{##}
+{#        .dark-mode label,#}
+{#        .dark-mode h1,#}
+{#        .dark-mode h2,#}
+{#        .dark-mode h3,#}
+{#        .dark-mode p {#}
+{#            color: #f0f0f0 !important;#}
+{#        }#}
+{##}
+{#        .dark-mode canvas {#}
+{#            background-color: transparent !important;#}
+{#        }#}
+{##}
+{#        /* Dark Mode Toggle Switch */#}
+{#        .switch {#}
+{#            position: relative;#}
+{#            display: inline-block;#}
+{#            width: 50px;#}
+{#            height: 25px;#}
+{#            margin-left: 20px;#}
+{#        }#}
+{##}
+{#        .switch input {#}
+{#            opacity: 0;#}
+{#            width: 0;#}
+{#            height: 0;#}
+{#        }#}
+{##}
+{#        .slider {#}
+{#            position: absolute;#}
+{#            cursor: pointer;#}
+{#            top: 0;#}
+{#            left: 0;#}
+{#            right: 0;#}
+{#            bottom: 0;#}
+{#            background-color: #ccc;#}
+{#            transition: .4s;#}
+{#            border-radius: 34px;#}
+{#        }#}
+{##}
+{#        .slider:before {#}
+{#            position: absolute;#}
+{#            content: "";#}
+{#            height: 19px;#}
+{#            width: 19px;#}
+{#            left: 4px;#}
+{#            bottom: 3px;#}
+{#            background-color: white;#}
+{#            transition: .4s;#}
+{#            border-radius: 50%;#}
+{#        }#}
+{##}
+{#        input:checked + .slider {#}
+{#            background-color: #3B82F6;#}
+{#        }#}
+{##}
+{#        input:checked + .slider:before {#}
+{#            transform: translateX(24px);#}
+{#        }#}
+{##}
+{#        .slider.round {#}
+{#            border-radius: 34px;#}
+{#        }#}
+{##}
+{#        .slider.round:before {#}
+{#            border-radius: 50%;#}
+{#        }#}
+{##}
+{#        /* >>> Fix for card text in dark mode <<< */#}
+{#        .dark-mode .card {#}
+{#            background-color: #1f1f1f !important;#}
+{#            border: 1px solid #444;#}
+{#            color: #ffffff !important;#}
+{#        }#}
+{##}
+{#        .dark-mode .card p,#}
+{#        .dark-mode .card span,#}
+{#        .dark-mode .card strong,#}
+{#        .dark-mode .card .card-text {#}
+{#            color: #ffffff !important;#}
+{#        }#}
+{##}
+{##}
+{#    </style>#}
+{#</head>#}
+{#<body>#}
+{##}
+{#<!-- Navbar -->#}
+{#<nav class="navbar navbar-expand-lg">#}
+{#    <div class="container">#}
+{#        <a href="{% url 'home' %}" class="brand">#}
+{#          <span class="brand-name">Fashion Assistant</span>#}
+{#        </a>#}
+{#        <button class="navbar-toggler" type="button" data-bs-toggle="collapse" data-bs-target="#navbarNav"#}
+{#                aria-controls="navbarNav" aria-expanded="false" aria-label="Toggle navigation">#}
+{#            <span class="navbar-toggler-icon" style="filter: invert(100%)"></span>#}
+{#        </button>#}
+{#        <div class="collapse navbar-collapse" id="navbarNav">#}
+{#            <ul class="navbar-nav ms-auto d-flex align-items-center">#}
+{#                {% if user.is_authenticated %}#}
+{#                    <li class="nav-item">#}
+{#                        <a class="nav-link" href="{% url 'profile' %}">Profile</a>#}
+{#                    </li>#}
+{#                     <li class="nav-item">#}
+{#                        <a class="nav-link" href="{% url 'calendar' %}">Outfit Planner</a>#}
+{#                     </li>#}
+{#                    <li class="nav-item">#}
+{#                        <form method="post" action="{% url 'logout' %}" class="d-inline">#}
+{#                            {% csrf_token %}#}
+{#                            <button type="submit" class="btn-accent ms-2">Logout</button>#}
+{#                        </form>#}
+{#                    </li>#}
+{#                {% else %}#}
+{#                    <li class="nav-item">#}
+{#                        <a class="nav-link" href="{% url 'login' %}">Login</a>#}
+{#                    </li>#}
+{#                    <li class="nav-item">#}
+{#                        <a class="btn-accent ms-2" href="{% url 'register' %}">Register</a>#}
+{#                    </li>#}
+{#                {% endif %}#}
+{#                <!-- Dark Mode Toggle -->#}
+{#                <li class="nav-item">#}
+{#                    <label class="switch">#}
+{#                        <input type="checkbox" id="darkModeToggle">#}
+{#                        <span class="slider round"></span>#}
+{#                    </label>#}
+{#                </li>#}
+{#            </ul>#}
+{#        </div>#}
+{#    </div>#}
+{#</nav>#}
+{##}
+{#<!-- Main content -->#}
+{#<main>#}
+{#    {% block content %}#}
+{#    {% endblock %}#}
+{#</main>#}
+{##}
+{#<!-- Footer -->#}
+{#<footer>#}
+{#    &copy; 2025 Fashion Assistant. All rights reserved.#}
+{#</footer>#}
+{##}
+{#<!-- Scripts -->#}
+{#<script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.0/dist/js/bootstrap.bundle.min.js"></script>#}
+{#<script>#}
+{#    const toggle = document.getElementById('darkModeToggle');#}
+{#    const body = document.body;#}
+{#    const html = document.documentElement;#}
+{##}
+{#    // Load from localStorage#}
+{#    if (localStorage.getItem('darkMode') === 'enabled') {#}
+{#        body.classList.add('dark-mode');#}
+{#        html.classList.add('dark-mode');#}
+{#        toggle.checked = true;#}
+{#    }#}
+{##}
+{#    toggle.addEventListener('change', () => {#}
+{#        if (toggle.checked) {#}
+{#            body.classList.add('dark-mode');#}
+{#            html.classList.add('dark-mode');#}
+{#            localStorage.setItem('darkMode', 'enabled');#}
+{#        } else {#}
+{#            body.classList.remove('dark-mode');#}
+{#            html.classList.remove('dark-mode');#}
+{#            localStorage.setItem('darkMode', 'disabled');#}
+{#        }#}
+{#    });#}
+{#</script>#}
 {#</body>#}
 {#</html>#}
 
 <!DOCTYPE html>
 <html lang="en">
 <head>
-    <meta charset="UTF-8">
-    <title>Fashion Assistant</title>
-    <meta name="viewport" content="width=device-width, initial-scale=1">
-    <!-- Bootstrap + Google Fonts -->
-    <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.0/dist/css/bootstrap.min.css" rel="stylesheet">
-    <link href="https://fonts.googleapis.com/css2?family=Poppins:wght@400;600&display=swap" rel="stylesheet">
+  <meta charset="UTF-8">
+  <title>Fashion Assistant</title>
+  <meta name="viewport" content="width=device-width, initial-scale=1">
+  {% load static %}
 
-    <style>
-        :root {
-            --primary: #7F56D9;
-            --secondary: #F4EBFF;
-            --accent: #D6BBFB;
-            --text-dark: #1D1D1F;
-            --text-muted: #6B7280;
-        }
+  <!-- Prevent light flash on load if dark mode is saved -->
+  <script>
+  (() => {
+    try {
+      if (localStorage.getItem('darkMode') === 'enabled') {
+        document.documentElement.classList.add('dark-mode');
+      }
+    } catch (e) {}
+  })();
+  </script>
 
-        html, body {
-            margin: 0;
-            padding: 0;
-            height: 100%;
-            font-family: 'Poppins', sans-serif;
-            background: linear-gradient(to right, var(--secondary), #fff);
-            color: var(--text-dark);
-            display: flex;
-            flex-direction: column;
-        }
+  <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.0/dist/css/bootstrap.min.css" rel="stylesheet">
+  <link href="https://fonts.googleapis.com/css2?family=Poppins:wght@400;600;800&display=swap" rel="stylesheet">
 
-        nav {
-            background-color: var(--primary);
-            padding: 10px 0;
-        }
+  <style>
+    :root{
+      --primary:#14213D;
+      --accent:#264653;
+      --text-muted:#6B7280;
+      --background-light:linear-gradient(140deg,#FFF4E6 30%,#FFEADC 20%,#FFF8F0 60%);
+      --background-dark:linear-gradient(140deg,#1a1a1a 30%,#121212 70%);
+    }
 
-        .navbar-brand {
-            color: white !important;
-            font-weight: 600;
-            font-size: 1.5rem;
-        }
+    html,body{
+      height:100%; margin:0; padding:0;
+      font-family:'Poppins',sans-serif;
+      background:var(--background-light);
+    }
+    body{ display:flex; flex-direction:column; min-height:100vh; }
 
-        .nav-link {
-            color: var(--accent) !important;
-            font-weight: 500;
-            transition: all 0.3s ease;
-        }
+    /* Smooth transitions */
+    html, body, .card, nav.navbar, footer, .btn, .form-control, .form-select,
+    .dropdown-menu, .modal-content, .carousel, .carousel-item {
+      transition: background-color .25s ease, color .25s ease, border-color .25s ease, background .25s ease;
+    }
 
-        .nav-link:hover {
-            color: white !important;
-            transform: translateY(-1px);
-        }
+    /* Brand */
+    .brand{ display:inline-flex; align-items:center; gap:10px; text-decoration:none; }
+    .brand-name{ font-weight:800; letter-spacing:.2px; color:#0f172a; }
+    .brand:hover .brand-logo{ transform:translateY(-1px); }
+    .brand-logo{ transition:transform .2s ease; }
+    @media (max-width:640px){ .brand-name{ display:none; } }
 
-        .btn-primary {
-            background-color: var(--primary);
-            border: none;
-            color: white;
-            border-radius: 25px;
-            padding: 10px 25px;
-            transition: all 0.3s ease;
-        }
+    nav.navbar{
+      background-color:rgb(249,250,251);
+      backdrop-filter:blur(6px);
+      padding:10px 0; box-shadow:0 2px 8px rgba(0,0,0,.05);
+      border-bottom:1px solid rgba(0,0,0,.05);
+      position:sticky; top:0; z-index:1000;
+    }
+    .navbar-brand{ font-weight:800; font-size:1.8rem; color:var(--primary) !important; font-family:Calibri; }
+    .nav-link{ color:var(--primary) !important; font-weight:500; margin-left:25px; transition:color .3s ease; }
+    .nav-link:hover{ color:var(--accent) !important; }
 
-        .btn-primary:hover {
-            background-color: #6b46c1;
-            transform: scale(1.05);
-        }
+    .btn-accent{
+      background:#C68B59; color:#fff; border:none;
+      border-radius:999px; padding:8px 18px; font-weight:600; transition:all .25s ease;
+    }
+    .btn-accent:hover{ background:#A97142; text-decoration:none; }
 
-        main {
-            flex: 1;
-            padding: 40px 20px;
-        }
+    .btn-outline-primary{
+      border:2px solid #C68B59; color:#C68B59; background:transparent;
+      border-radius:999px; padding:8px 18px; font-weight:600; transition:all .25s ease;
+    }
+    .btn-outline-primary:hover{ background:#C68B59; color:#fff; }
 
-        footer {
-            background-color: var(--primary);
-            color: var(--accent);
-            padding: 15px 0;
-            text-align: center;
-            font-size: 0.9rem;
-        }
-    </style>
-    {% load static %}
+    .btn-outline-danger{
+      border:2px solid #dc3545; color:#dc3545; background:transparent;
+      border-radius:999px; padding:6px 14px; font-weight:600; transition:all .25s ease;
+    }
+    .btn-outline-danger:hover{ background:#dc3545; color:#fff; }
+
+    main{ flex:1; padding:40px 20px; }
+
+    footer{
+      background-color:#f9fafb; color:var(--text-muted);
+      padding:15px 0; text-align:center; font-size:.9rem; border-top:1px solid #e5e7eb;
+    }
+
+    /* Dark Mode */
+    html.dark-mode, body.dark-mode{ background:var(--background-dark) !important; color:#f0f0f0; }
+
+    .dark-mode nav.navbar{ background-color:#1c1c1c !important; border-bottom:1px solid #333; }
+    .dark-mode .navbar-toggler-icon{ filter: invert(0%) brightness(200%); } /* да не е предобела */
+    .dark-mode .nav-link{ color:#f0f0f0 !important; }
+    .dark-mode .brand-name{ color:#e5e7eb !important; }
+
+    .dark-mode footer{ background-color:#111 !important; color:#f0f0f0 !important; border-top:1px solid #333 !important; }
+
+    .dark-mode .card,
+    .dark-mode .modal-content,
+    .dark-mode .dropdown-menu{
+      background-color:#1f1f1f !important; border:1px solid #333 !important; color:#ffffff !important;
+    }
+    .dark-mode .card p,
+    .dark-mode .card span,
+    .dark-mode .card strong,
+    .dark-mode .card .card-text{ color:#ffffff !important; }
+
+    .dark-mode .btn,
+    .dark-mode .form-control,
+    .dark-mode .form-select{
+      background-color:#2a2a2a; color:#f0f0f0; border-color:#444;
+    }
+    .dark-mode .btn:hover{ background-color:#3B82F6; }
+
+    .dark-mode .btn-outline-primary{
+      color:#e5e7eb !important; border-color:#666 !important; background:transparent !important;
+    }
+    .dark-mode .btn-outline-primary:hover{
+      background:#C68B59 !important; color:#111 !important; border-color:#C68B59 !important;
+    }
+
+    .dark-mode .carousel,
+    .dark-mode .carousel-item{ background-color:#1f1f1f !important; }
+    .dark-mode .carousel-control-prev-icon,
+    .dark-mode .carousel-control-next-icon{ filter: invert(100%); }
+
+    .dark-mode h1, .dark-mode h2, .dark-mode h3,
+    .dark-mode p, .dark-mode label { color:#f0f0f0 !important; }
+
+    .dark-mode canvas{ background-color:transparent !important; }
+
+    /* Toggle switch */
+    .switch{ position:relative; display:inline-block; width:50px; height:25px; margin-left:20px; }
+    .switch input{ opacity:0; width:0; height:0; }
+    .slider{ position:absolute; cursor:pointer; inset:0; background-color:#ccc; transition:.4s; border-radius:34px; }
+    .slider:before{ position:absolute; content:""; height:19px; width:19px; left:4px; bottom:3px; background-color:#fff; transition:.4s; border-radius:50%; }
+    input:checked + .slider{ background-color:#3B82F6; }
+    input:checked + .slider:before{ transform:translateX(24px); }
+    .slider.round{ border-radius:34px; }
+    .slider.round:before{ border-radius:50%; }
+  </style>
 </head>
 <body>
 
 <!-- Navbar -->
-<nav class="navbar navbar-expand-lg shadow-sm">
-    <div class="container">
-        <a class="navbar-brand" href="{% url 'home' %}">Fashion Assistant</a>
-        <button class="navbar-toggler" type="button" data-bs-toggle="collapse" data-bs-target="#navbarNav"
-                aria-controls="navbarNav" aria-expanded="false" aria-label="Toggle navigation">
-            <span class="navbar-toggler-icon" style="filter: invert(100%)"></span>
-        </button>
-        <div class="collapse navbar-collapse" id="navbarNav">
-            <ul class="navbar-nav ms-auto d-flex align-items-center">
-                {% if user.is_authenticated %}
-                    <li class="nav-item">
-                        <a class="nav-link" href="{% url 'profile' %}">Profile</a>
-                    </li>
-                    <li class="nav-item">
-                        <form method="post" action="{% url 'logout' %}" class="d-inline">
-                            {% csrf_token %}
-                            <button type="submit" class="nav-link btn btn-link">Logout</button>
-                        </form>
-                    </li>
-                {% else %}
-                    <li class="nav-item">
-                        <a class="nav-link" href="{% url 'login' %}">Login</a>
-                    </li>
-                    <li class="nav-item">
-                        <a class="nav-link" href="{% url 'register' %}">Register</a>
-                    </li>
-                {% endif %}
-            </ul>
-        </div>
+<nav class="navbar navbar-expand-lg">
+  <div class="container">
+    <a href="{% url 'home' %}" class="brand">
+      <span class="brand-name">Fashion Assistant</span>
+    </a>
+    <button class="navbar-toggler" type="button" data-bs-toggle="collapse" data-bs-target="#navbarNav"
+            aria-controls="navbarNav" aria-expanded="false" aria-label="Toggle navigation">
+      <span class="navbar-toggler-icon" style="filter: invert(100%)"></span>
+    </button>
+    <div class="collapse navbar-collapse" id="navbarNav">
+      <ul class="navbar-nav ms-auto d-flex align-items-center">
+        {% if user.is_authenticated %}
+          <li class="nav-item"><a class="nav-link" href="{% url 'profile' %}">Profile</a></li>
+          <li class="nav-item"><a class="nav-link" href="{% url 'calendar' %}">Outfit Planner</a></li>
+          <li class="nav-item">
+            <form method="post" action="{% url 'logout' %}" class="d-inline">
+              {% csrf_token %}
+              <button type="submit" class="btn-accent ms-2">Logout</button>
+            </form>
+          </li>
+        {% else %}
+          <li class="nav-item"><a class="nav-link" href="{% url 'login' %}">Login</a></li>
+          <li class="nav-item"><a class="btn-accent ms-2" href="{% url 'register' %}">Register</a></li>
+        {% endif %}
+        <!-- Dark Mode Toggle -->
+        <li class="nav-item">
+          <label class="switch">
+            <input type="checkbox" id="darkModeToggle">
+            <span class="slider round"></span>
+          </label>
+        </li>
+      </ul>
     </div>
+  </div>
 </nav>
 
 <main>
-    {% block content %}
-    {% endblock %}
+  {% block content %}{% endblock %}
 </main>
 
 <footer>
-    <div class="container">
-        &copy; 2025 Fashion Assistant. All rights reserved.
-    </div>
+  &copy; 2025 Fashion Assistant. All rights reserved.
 </footer>
 
 <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.0/dist/js/bootstrap.bundle.min.js"></script>
+<script>
+  const toggle = document.getElementById('darkModeToggle');
+
+  function applyDark(on){
+    const op = on ? 'add' : 'remove';
+    document.documentElement.classList[op]('dark-mode');
+    document.body.classList[op]('dark-mode');
+    try{ localStorage.setItem('darkMode', on ? 'enabled' : 'disabled'); }catch(e){}
+  }
+
+  // init from saved state + checkbox UI
+  document.addEventListener('DOMContentLoaded', () => {
+    const saved = localStorage.getItem('darkMode') === 'enabled';
+    applyDark(saved);
+    if (toggle) toggle.checked = saved;
+  });
+
+  if (toggle){
+    toggle.addEventListener('change', () => applyDark(toggle.checked));
+  }
+</script>
 </body>
 </html>
+
