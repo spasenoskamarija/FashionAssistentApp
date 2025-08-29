@@ -43,3 +43,19 @@ class UserOutfit(models.Model):
         return f"Outfit of {self.profile.user.username} - {self.id}"
 
 
+class OutfitPlan(models.Model):
+    profile = models.ForeignKey(Profile, on_delete=models.CASCADE, related_name='plans')
+    outfit = models.ForeignKey('UserOutfit', on_delete=models.CASCADE, related_name='plans')
+    date = models.DateField()
+
+    note = models.CharField(max_length=120, blank=True)
+
+    class Meta:
+        unique_together = ('profile', 'date', 'outfit')
+        ordering = ['-date']
+
+    def __str__(self):
+        return f"{self.profile.user.username} • {self.date} • {self.outfit_id}"
+
+
+
