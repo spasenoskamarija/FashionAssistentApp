@@ -1,6 +1,6 @@
 # assistant/forms.py
 from django import forms
-from .models import Profile, ClothingItem, UserOutfit
+from .models import Profile, ClothingItem, UserOutfit, OutfitPlan
 from django.contrib.auth.forms import UserCreationForm
 from django.contrib.auth.models import User
 from django import forms
@@ -16,7 +16,7 @@ class UserRegisterForm(UserCreationForm):
 class ProfileForm(forms.ModelForm):
     class Meta:
         model = Profile
-        fields = ['profile_picture', 'gender']  # <-- add gender
+        fields = ['profile_picture']  # <-- add gender
 
 class ClothingItemForm(forms.ModelForm):
     class Meta:
@@ -27,5 +27,12 @@ class UserOutfitForm(forms.ModelForm):
     class Meta:
         model = UserOutfit
         fields = ['image', 'rating', 'favorite']
+
+class OutfitPlanForm(forms.ModelForm):
+    date = forms.DateField(widget=forms.DateInput(attrs={'type': 'date'}))
+    class Meta:
+        model = OutfitPlan
+        fields = ['outfit', 'date', 'note']
+
 
 
