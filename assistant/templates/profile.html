@@ -1,25 +1,21 @@
 <!DOCTYPE html>
 <html lang="en">
 <head>
-    <meta charset="UTF-8">
-    <title>Profile</title>
+  <meta charset="UTF-8" />
+  <title>Profile</title>
 </head>
 <body>
 {% extends "base.html" %}
 {% load static %}
 {% block content %}
 
-<!-- ===== HERO (glass header with avatar ring) ===== -->
 <div class="profile-hero">
   <div class="hero-cover">
-    {% if top_rated_outfits %}
-        <img src="{% static 'images/profile-header.jpg' %}" alt="Profile header">
-    {% endif %}
+    <img src="{% static 'images/profile-header.jpg' %}" alt="" />
   </div>
 
   <div class="hero-glass">
     <div class="hero-left">
-      <!-- Avatar upload -->
       <form id="avatarForm" method="post" enctype="multipart/form-data" action="{% url 'profile' %}">
         {% csrf_token %}
         <input type="hidden" name="form_kind" value="avatar">
@@ -37,12 +33,9 @@
       </form>
 
       <div class="hero-meta">
-        <div class="hero-title">
-          <h1>Hello, {{ profile.user.username }}</h1>
-        </div>
+        <h1 class="hero-title">Hello, {{ profile.user.username }}</h1>
         <p class="muted">Discover your styles and plan your next look.</p>
 
-        <!-- Quick stats -->
         <div class="hero-stats">
           <div class="stat">
             <span class="num">{{ outfits_count }}</span>
@@ -61,25 +54,22 @@
     </div>
 
     <div class="hero-actions">
-      <a href="{% url 'wardrobe' %}" class="btn-outline-brand">Your Wardrobe</a>
+      <a href="{% url 'wardrobe' %}" class="btn-outline-brand" style="text-decoration: none;">Your Wardrobe</a>
       <button class="btn-brand" data-bs-toggle="modal" data-bs-target="#addOutfitModal">Add Outfit</button>
     </div>
   </div>
 </div>
-<!-- ===== /HERO ===== -->
 
-
-<!-- ===== INSIGHTS (Chart + Top Rated) ===== -->
 <div class="insights-grid">
   <div class="card">
     <div class="card-title">🎨 Style Distribution</div>
     <div class="chart-wrap"><canvas id="styleChart"></canvas></div>
     {% if style_stats %}
-    <div class="legend">
-      {% for s in style_stats %}
-        <span class="chip">{{ s.predicted_style|title }} • {{ s.count }}</span>
-      {% endfor %}
-    </div>
+      <div class="legend">
+        {% for s in style_stats %}
+          <span class="chip">{{ s.predicted_style|title }} • {{ s.count }}</span>
+        {% endfor %}
+      </div>
     {% else %}
       <p class="muted mb-0">No wardrobe data yet.</p>
     {% endif %}
@@ -91,15 +81,15 @@
       <div id="topRatedCarousel" class="carousel slide" data-bs-ride="carousel">
         <div class="carousel-inner">
           {% for outfit in top_rated_outfits %}
-          <div class="carousel-item {% if forloop.first %}active{% endif %}">
-            <div class="hero-img">
-              <img src="{{ outfit.image.url }}" alt="Top rated">
-              <div class="hero-meta-btm">
-                <span class="pill">{{ outfit.predicted_style }}</span>
-                <span class="pill">Rating: {{ outfit.rating }} ⭐</span>
+            <div class="carousel-item {% if forloop.first %}active{% endif %}">
+              <div class="hero-img">
+                <img src="{{ outfit.image.url }}" alt="Top rated">
+                <div class="hero-meta-btm">
+                  <span class="pill">{{ outfit.predicted_style }}</span>
+                  <span class="pill">Rating: {{ outfit.rating }} ⭐</span>
+                </div>
               </div>
             </div>
-          </div>
           {% endfor %}
         </div>
         <button class="carousel-control-prev" type="button" data-bs-target="#topRatedCarousel" data-bs-slide="prev">
@@ -114,10 +104,8 @@
     {% endif %}
   </div>
 </div>
-<!-- ===== /INSIGHTS ===== -->
 
 
-<!-- ===== GALLERY TOOLBAR ===== -->
 <div class="toolbar">
   <h5 class="mb-0 fw-bold">🖼 Your Outfits</h5>
   <div class="toolbar-actions">
@@ -127,12 +115,10 @@
   </div>
 </div>
 
-<!-- ===== OUTFITS GRID ===== -->
+
 <div class="grid-cards" id="outfitsGrid">
   {% for outfit in outfits %}
-  <div class="outfit-card"
-       data-style="{{ outfit.predicted_style|lower }}"
-       data-fav="{{ outfit.favorite|yesno:'1,0' }}">
+  <div class="outfit-card" data-style="{{ outfit.predicted_style|lower }}" data-fav="{{ outfit.favorite|yesno:'1,0' }}">
     <div class="img-wrap">
       <img src="{{ outfit.image.url }}" alt="Outfit">
       <div class="img-top-actions">
@@ -142,7 +128,6 @@
         </button>
         <a href="{% url 'delete_outfit' outfit.id %}" class="icon-badge danger">Delete</a>
       </div>
-      <div class="img-bottom-gradient"></div>
       <div class="img-bottom-meta">
         <span class="pill">{{ outfit.predicted_style }}</span>
         <span class="pill">⭐ {{ outfit.rating }}</span>
@@ -154,17 +139,14 @@
   {% endfor %}
 </div>
 
-<!-- Floating Add (mobile handy) -->
 <button class="fab btn-brand" data-bs-toggle="modal" data-bs-target="#addOutfitModal">＋</button>
 
-
-<!-- ===== ADD OUTFIT MODAL (unchanged) ===== -->
 <div class="modal fade" id="addOutfitModal" tabindex="-1" aria-hidden="true">
   <div class="modal-dialog">
     <div class="modal-content">
       <form method="post" enctype="multipart/form-data" action="{% url 'profile' %}">
         {% csrf_token %}
-            <input type="hidden" name="form_kind" value="outfit">
+        <input type="hidden" name="form_kind" value="outfit">
         <div class="modal-header">
           <h5 class="modal-title">Add Outfit</h5>
           <button type="button" class="btn-close" data-bs-dismiss="modal"></button>
@@ -181,342 +163,153 @@
   </div>
 </div>
 
-<!-- ===== STYLES (scoped) ===== -->
 <style>
-/* No body/background here – base.html handles the gradient */
+  .profile-hero{ position:relative; margin:40px auto 18px; max-width:1180px; border-radius:20px; overflow:hidden; }
+  .hero-cover{ height:170px; background:
+      radial-gradient(1200px 300px at -10% 0%, #FFEADC 0%, transparent 60%),
+      radial-gradient(900px 260px at 110% 20%, #FFD6A5 0%, transparent 60%), #FFF8F0; }
+  .hero-cover img{ width:100%; height:100%; object-fit:cover; opacity:.22; mix-blend:multiply; }
 
-/* HERO */
-    .profile-hero{
-        position:relative;
-        margin: 40px auto 18px;
-        max-width:1180px;
-        border-radius:20px;
-        overflow:hidden;
-    }
-    .hero-cover{
-        height:170px;
-        background:
-        radial-gradient(1200px 300px at -10% 0%, #FFEADC 0%, transparent 60%),
-        radial-gradient(900px 260px at 110% 20%, #FFD6A5 0%, transparent 60%), #FFF8F0;
-    }
-    .hero-cover img{
-        width:100%;
-        height:100%;
-        object-fit:cover;
-        opacity:.28;
-        mix-blend:multiply;
-        filter:saturate(90%) contrast(95%) brightness(98%);
-    }
+  .hero-glass{
+    position:relative; margin:-84px 16px 0; background:rgba(255,255,255,.78);
+    backdrop-filter: blur(10px); border:1px solid rgba(255,255,255,.6);
+    border-radius:16px; padding:18px; display:flex; align-items:center; justify-content:space-between; gap:16px;
+    box-shadow:0 10px 32px rgba(0,0,0,.08);
+  }
+  .hero-left{ display:flex; align-items:center; gap:14px; }
+  .hero-title{ font-size:22px; margin:0; letter-spacing:.2px; }
+  .muted{ color:#6B7280; margin:4px 0 8px; }
 
-    .hero-glass{
-        position:relative;
-        margin:-84px 16px 0;
-        background:rgba(255,255,255,.78);
-        backdrop-filter: blur(10px);
-        -webkit-backdrop-filter: blur(10px);
-        border:1px solid rgba(255,255,255,.6);
-        border-radius:16px;
-        padding:18px;
-        display:flex;
-        align-items:center;
-        justify-content:space-between;
-        gap:16px;
-        box-shadow:0 10px 32px rgba(0,0,0,.08);
-    }
-    .hero-left{
-        display:flex;
-        align-items:center;
-        gap:14px;
-    }
+  .avatar-frame{ position:relative; width:112px; height:112px; border-radius:50%; display:grid; place-items:center; background:transparent; border:0; padding:0; cursor:pointer; }
+  .avatar-ring{ position:absolute; inset:-2px; background: conic-gradient(from 180deg, #C68B59, #FFD6A5, #FFC4A3, #C68B59); border-radius:50%; }
+  .avatar-frame img, .avatar-initial{
+    position:relative; z-index:1; width:100px; height:100px; border-radius:50%; object-fit:cover; background:#fff;
+    display:grid; place-items:center; font-weight:700; font-size:32px; color:#C68B59; box-shadow:0 4px 14px rgba(0,0,0,.08);
+  }
 
-    /* Avatar ring */
-    .avatar-frame{
-        position:relative;
-        width:112px;
-        height:112px;
-        border-radius:50%;
-        display:grid;
-        place-items:center;
-        background:transparent;
-        border:0;
-        padding:0;
-        cursor:pointer;
-    }
+  .hero-stats{ display:flex; gap:12px; flex-wrap:wrap; }
+  .stat{ background:#F9FAFB; border:1px solid #EEF0F2; border-radius:12px; padding:8px 12px; min-width:92px; text-align:center; }
+  .stat .num{ font-weight:800; font-size:18px; color:#111827; display:block; }
+  .stat .label{ font-size:12px; color:#6B7280; }
 
-    .avatar-ring{
-        position:absolute;
-        inset:-2px;
-        background: conic-gradient(from 180deg, #C68B59, #FFD6A5, #FFC4A3, #C68B59);
-        border-radius:50%;
-        filter:saturate(110%);
-    }
+  .btn-brand{ background:#C68B59; color:#fff; border:none; border-radius:999px; padding:10px 18px; font-weight:600; transition:all .25s ease; }
+  .btn-brand:hover{ background:#A97142; }
+  .btn-outline-brand{ border:2px solid #C68B59; color:#C68B59; background:transparent; border-radius:999px; padding:10px 18px; font-weight:600; transition:all .25s ease; }
+  .btn-outline-brand:hover{ background:#C68B59; color:#fff; }
 
-    .avatar-frame img, .avatar-initial{
-        position:relative;
-        z-index:1;
-        width:100px;
-        height:100px;
-        border-radius:50%;
-        object-fit:cover;
-        background:#fff;
-        display:grid; place-items:center; font-weight:700; font-size:32px; color:#C68B59; box-shadow:0 4px 14px rgba(0,0,0,.08);
-    }
+  .insights-grid{ max-width:1180px; margin:16px auto; display:grid; grid-template-columns: 1fr 1fr; gap:18px; }
+  .card{ background:#fff; border-radius:16px; padding:16px; box-shadow:0 2px 14px rgba(0,0,0,.05); }
+  .card-title{ font-weight:700; margin-bottom:8px; }
+  .chart-wrap{ width:100%; max-width:380px; margin:6px auto 2px; }
+  .legend{ margin-top:10px; display:flex; flex-wrap:wrap; gap:8px; }
+  .chip{ background:#FFF4E6; color:#8B5E34; border:1px solid #F2D4B7; border-radius:999px; padding:4px 10px; font-size:12px; font-weight:600; }
 
-    .hero-meta h1{
-        font-size:22px;
-        margin:0;
-        letter-spacing:.2px;
-    }
+  .hero-img{ position:relative; border-radius:14px; overflow:hidden; background:#f8f9fa; height:340px; display:flex; align-items:center; justify-content:center; }
+  .hero-img img{ width:100%; height:100%; object-fit:contain; }
+  .hero-meta-btm{ position:absolute; left:10px; bottom:10px; display:flex; gap:6px; }
+  .pill{ background:#F3F4F6; color:#111827; border-radius:999px; padding:4px 10px; font-size:12px; font-weight:600; }
 
-    .muted{
-        color:#6B7280;
-        margin:4px 0 8px;
-    }
+  .toolbar{ max-width:1180px; margin:22px auto 10px; display:flex; align-items:center; justify-content:space-between; gap:12px; }
+  .toolbar-actions{ display:flex; gap:10px; align-items:center; flex-wrap:wrap; }
+  .tab{ border:2px solid #E5E7EB; background:#fff; color:#374151; border-radius:999px; padding:8px 14px; font-weight:600; transition:all .2s; }
+  .tab:hover{ border-color:#C68B59; color:#111827; }
+  .tab.active{ border-color:#C68B59; color:#111827; background:#FFF7ED; }
+  .search-input{ width:260px; max-width:40vw; border:1.5px solid #E5E7EB; border-radius:999px; padding:8px 14px; outline:none; }
+  .search-input:focus{ border-color:#C68B59; }
 
-    .hero-stats{
-        display:flex;
-        gap:12px;
-    }
+  .grid-cards{ max-width:1180px; margin:0 auto 40px; display:grid; gap:16px; grid-template-columns: repeat(auto-fill, minmax(220px, 1fr)); }
+  .outfit-card .img-wrap{ position:relative; border-radius:14px; overflow:hidden; background:#fff; border:1px solid #E5E7EB; box-shadow:0 2px 8px rgba(0,0,0,.05); }
+  .outfit-card img{ width:100%; height:280px; object-fit:cover; transition:transform .25s ease; display:block; }
+  .outfit-card:hover img{ transform:scale(1.03); }
 
-    .hero-stats .stat{
-        background:#F9FAFB;
-        border:1px solid #EEF0F2;
-        border-radius:12px;
-        padding:8px 12px;
-        min-width:92px;
-        text-align:center;
-    }
+  .img-top-actions{ position:absolute; top:8px; right:8px; display:flex; gap:6px; opacity:0; transform:translateY(-4px); transition:opacity .2s, transform .2s; }
+  .outfit-card:hover .img-top-actions{ opacity:1; transform:translateY(0); }
+  .icon-btn{ background:rgba(255,255,255,.95); border:none; border-radius:999px; width:34px; height:34px; padding:0; font-size:16px; cursor:pointer; box-shadow:0 2px 8px rgba(0,0,0,.12); }
+  .icon-badge{ background:#fff; border:2px solid; color:#dc3545; border-radius:999px; padding:5px 10px; font-size:13px; font-weight:600; transition:all .25s; }
+  .icon-badge:hover{ background:#dc3545; color:#fff; }
 
-    .stat .num{
-        font-weight:800;
-        font-size:18px;
-        color:#111827;
-        display:block;
-    }
+  .fab{ position:fixed; right:24px; bottom:24px; width:54px; height:54px; border-radius:999px; display:flex; align-items:center; justify-content:center; font-size:24px; box-shadow:0 10px 24px rgba(0,0,0,.2); }
 
-    .stat .label{
-        font-size:12px;
-        color:#6B7280;
-    }
+  @media (max-width: 576px){
+  .hero-cover{
+        height: 120px;
+  }
+  .hero-glass{
+    margin: -64px 12px 0;
+    padding: 12px;
+    gap: 12px;
+    flex-direction: column;
+    align-items: stretch;
+  }
 
-    /* Brand buttons */
-    .btn-brand{
-        background:#C68B59;
-        color:#fff;
-        border:none;
-        border-radius:999px;
-        padding:10px 18px;
-        font-weight:600;
-        transition:all .25s ease;
-    }
+  .hero-left{
+    display: grid;
+    grid-template-columns: 72px 1fr;
+    align-items: center;
+    column-gap: 12px;
+  }
+  .avatar-frame{ width: 72px; height: 72px; }
+  .avatar-frame img,
+  .avatar-initial{ width: 64px; height: 64px; font-size: 24px; }
 
-    .btn-brand:hover{ background:#A97142; }
+  .hero-title{ font-size: 18px; }
+  .muted{ font-size: 13px; margin: 2px 0 6px; }
 
-    .btn-outline-brand{
-        border:2px solid #C68B59;
-        color:#C68B59;
-        background:transparent;
-        border-radius:999px;
-        padding:10px 18px;
-        font-weight:600;
-        transition:all .25s ease;
+  .hero-stats{
+    display: grid;
+    grid-template-columns: repeat(3, minmax(0,1fr));
+    gap: 8px;
+    margin-top: 6px;
+  }
+  .hero-stats .stat{
+    min-width: 0;
+    padding: 6px 8px;
+    border-radius: 10px;
+  }
+  .stat .num{ font-size: 16px; }
+  .stat .label{ font-size: 11px; }
+
+  .hero-actions{
+    display: grid;
+    grid-template-columns: repeat(2, minmax(0,1fr));
+    gap: 10px;
+    margin-top: 4px;
+  }
+  .hero-actions .btn-brand,
+  .hero-actions .btn-outline-brand{
+    width: 100%;
+    padding: 10px 12px;
+    border-radius: 14px;
+  }
+
+  .hero-img{ height: 260px; }
+}
+
+    @media (max-width: 576px){
+      .grid-cards{
+        grid-template-columns: repeat(2, minmax(0, 1fr));
+        gap: 10px;
+      }
+
+      .outfit-card img{
+        height: 200px;
+      }
+
+      .img-bottom-meta{ padding: 6px 8px; }
+      .pill{ font-size: 11px; padding: 3px 8px; }
+      .icon-btn{ width: 30px; height: 30px; font-size: 14px; }
+      .icon-badge{ padding: 4px 8px; font-size: 12px; }
     }
 
-    .btn-outline-brand:hover{ background:#C68B59; color:#fff; }
-
-    /* Insights */
-    .insights-grid{
-        max-width:1180px;
-        margin:16px auto;
-        display:grid;
-        grid-template-columns: 1fr 1fr; gap:18px;
-    }
-
-    .card{
-        background:#fff;
-        border-radius:16px;
-        padding:16px;
-        box-shadow:0 2px 14px rgba(0,0,0,.05);
-    }
-
-    .card-title{
-        font-weight:700;
-        margin-bottom:8px;
-    }
-
-    .chart-wrap{
-        width:100%;
-        max-width:380px;
-        margin:6px auto 2px;
-    }
-
-    .legend{
-        margin-top:10px;
-        display:flex;
-        flex-wrap:wrap; gap:8px;
-    }
-
-    .chip{
-        background:#FFF4E6;
-        color:#8B5E34;
-        border:1px solid #F2D4B7;
-        border-radius:999px;
-        padding:4px 10px;
-        font-size:12px;
-        font-weight:600;
-    }
-
-    /* Top-rated hero */
-    .hero-img{
-        position:relative;
-        border-radius:14px;
-        overflow:hidden;
-        background:#f8f9fa;
-        height:340px;
-        display:flex;
-        align-items:center;
-        justify-content:center;
-    }
-
-    .hero-img img{
-        width:100%;
-        height:100%;
-        object-fit:contain;
-    }
-
-    .hero-meta-btm{
-        position:absolute;
-        left:10px;
-        bottom:10px;
-        display:flex;
-        gap:6px;
-    }
-
-    .pill{
-        background:#F3F4F6;
-        color:#111827;
-        border-radius:999px;
-        padding:4px 10px;
-        font-size:12px;
-        font-weight:600;
-    }
-
-    /* Toolbar + search */
-    .toolbar{ max-width:1180px; margin:22px auto 10px; display:flex; align-items:center; justify-content:space-between; gap:12px; }
-    .toolbar-actions{ display:flex; gap:10px; align-items:center; }
-    .tab{ border:2px solid #E5E7EB; background:#fff; color:#374151; border-radius:999px; padding:8px 14px; font-weight:600; transition:all .2s; }
-    .tab:hover{ border-color:#C68B59; color:#111827; }
-    .tab.active{ border-color:#C68B59; color:#111827; background:#FFF7ED; }
-    .search-input{ width:260px; max-width:40vw; border:1.5px solid #E5E7EB; border-radius:999px; padding:8px 14px; outline:none; }
-    .search-input:focus{ border-color:#C68B59; }
-
-    /* Outfits grid */
-    .grid-cards{
-      max-width:1180px; margin:0 auto 40px;
-      display:grid; gap:16px;
-      grid-template-columns: repeat(auto-fill, minmax(220px, 1fr));
-    }
-
-    /* Картата да изгледа чисто и професионално (без overlay натрупување) */
-    .outfit-card .img-wrap{
-      position:relative;
-      border-radius:14px;
-      overflow:hidden;
-      background:#fff;                  /* чиста позадина */
-      border:1px solid #E5E7EB;
-      box-shadow:0 2px 8px rgba(0,0,0,.05);
-    }
-
-    /* Фиксна, убава висина + нежeн hover */
-    .outfit-card img{
-      width:100%;
-      height:280px;                     /* фиксна висина за да не „експлодира“ */
-      object-fit:cover;
-      transition:transform .25s ease;
-      display:block;
-    }
-    .outfit-card:hover img{ transform:scale(1.03); }
-
-    /* Горните акции да не пречат – појави ги само на hover */
-    .img-top-actions{
-      position:absolute; top:8px; right:8px;
-      display:flex; gap:6px;
-      opacity:0; transform:translateY(-4px);
-      transition:opacity .2s ease, transform .2s ease;
-    }
-    .outfit-card:hover .img-top-actions{
-      opacity:1; transform:translateY(0);
-    }
-
-    /* Малечки кружни копчиња */
-    .icon-btn{
-      background:rgba(255,255,255,.95);
-      border:none;
-      border-radius:999px;
-      width:34px; height:34px; padding:0;
-      font-size:16px; cursor:pointer;
-      box-shadow:0 2px 8px rgba(0,0,0,.12);
-    }
-
-    .img-bottom-gradient{ display:none; }
-
-    .img-bottom-meta{
-      position:static;
-      left:auto; bottom:auto;
-      display:flex; gap:8px;
-      justify-content:space-between;
-      padding:8px 12px;
-      background:#fff;
-      border-top:1px solid #F0F2F4;
-    }
-
-    .icon-badge {
-        background: #fff;
-        border: 2px solid;
-        color: #dc3545;
-        border-radius: 999px;
-        padding: 5px 10px;
-        font-size: 13px;
-        font-weight: 600;
-        cursor: pointer;
-        transition: all 0.25s ease;
-    }
-
-    .icon-badge:hover {
-        background: #dc3545;
-        color: #fff;
-    }
-
-    /* Floating Add */
-    .fab{
-        position:fixed;
-        right:24px;
-        bottom:24px;
-        width:54px;
-        height:54px;
-        border-radius:999px;
-        display:flex;
-        align-items:center;
-        justify-content:center;
-        font-size:24px;
-        box-shadow:0 10px 24px rgba(0,0,0,.2);
-    }
-
-    /* Responsive */
-    @media (max-width: 992px){ .insights-grid{ grid-template-columns:1fr; } }
-    @media (max-width: 768px){
-      .hero-glass{ flex-direction:column; align-items:flex-start; margin:-72px 12px 0; }
-      .avatar-frame{ width:96px; height:96px; }
-      .avatar-frame img, .avatar-initial{ width:86px; height:86px; font-size:28px; }
-      .hero-img{ height:300px; }
-      .fab{ right:16px; bottom:16px; }
+    @media (max-width: 992px) and (min-width: 577px){
+      .grid-cards{
+        grid-template-columns: repeat(3, minmax(0, 1fr));
+      }
     }
 </style>
 
-<!-- ===== SCRIPTS ===== -->
 <script src="https://cdn.jsdelivr.net/npm/chart.js"></script>
 <script>
-  // Doughnut chart
   (function(){
     const el = document.getElementById('styleChart');
     if(!el) return;
@@ -535,11 +328,11 @@
     });
   })();
 
-  // Simple client-side filtering (optional)
   (function(){
     const tabs = document.querySelectorAll('.tab');
     const grid = document.getElementById('outfitsGrid');
     const search = document.getElementById('searchInput');
+
     function apply(){
       const active = document.querySelector('.tab.active')?.dataset.filter || 'all';
       const q = (search?.value || '').toLowerCase();

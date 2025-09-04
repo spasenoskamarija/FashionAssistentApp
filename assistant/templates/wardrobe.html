@@ -1,202 +1,196 @@
 <!DOCTYPE html>
 <html lang="en">
 <head>
-    <meta charset="UTF-8">
-    <title>Wardrobe</title>
+  <meta charset="UTF-8">
+  <title>Wardrobe</title>
 </head>
 <body>
 
-
-<!-- wardrobe.html -->
 {% extends 'base.html' %}
 {% load static %}
 
 {% block content %}
 
+<!-- soft blobs -->
 <div class="bg-shape bg-shape1"></div>
 <div class="bg-shape bg-shape2"></div>
 <div class="bg-shape bg-shape3"></div>
 
 <div class="container mt-4">
-    <h2>Digital Wardrobe</h2>
 
-    <div class="d-flex justify-content-end mb-3">
-        <a href="{% url 'profile' %}" class="btn btn-outline-primary me-2">Back to Profile</a>
-        <a href="{% url 'suggest_outfit' %}" class="btn btn-outline-primary">Suggest Outfit</a>
+  <!-- ===== Page toolbar ===== -->
+  <div class="page-head">
+    <h2 class="page-title">Digital Wardrobe</h2>
+    <div class="head-actions">
+      <a href="{% url 'profile' %}" class="btn btn-outline-primary">Back to Profile</a>
+      <a href="{% url 'suggest_outfit' %}" class="btn btn-outline-primary">Suggest Outfit</a>
+    </div>
+  </div>
+
+  <!-- ===== Upload card ===== -->
+  <form method="post" enctype="multipart/form-data" class="upload-card">
+    {% csrf_token %}
+
+    <!-- Dropzone -->
+    <label class="dropzone" id="dropZone" for="id_image" title="Choose image or drop here">
+      <span class="dz-icon">📷</span>
+      <div class="dz-copy">
+        <div class="dz-title">Choose image or drop here</div>
+      </div>
+    </label>
+
+    <!-- Side actions -->
+    <div class="upload-side">
+      <div class="file-line">
+        <span class="file-name" id="fileName">No image chosen</span>
+      </div>
+      <button type="submit" class="btn btn-accent" id="submitBtn">Add Clothing Item</button>
     </div>
 
-    <form method="post" enctype="multipart/form-data" class="mb-4">
-        {% csrf_token %}
-        {{ form.as_p }}
-        <button type="submit" class="btn btn-accent">Add Clothing Item</button>
-    </form>
+    <!-- real input (hidden) -->
+    <input id="id_image" type="file" name="image" accept="image/*" capture="environment" class="d-none" required>
 
-    <div class="row">
-        {% for item in items %}
-            <div class="col-md-3 mb-4">
-                <div class="card h-100 shadow-sm">
-                    <img src="{{ item.image.url }}" class="card-img-top" alt="Clothing image">
-                    <div class="card-body">
-                        <p class="card-text"><strong>Description:</strong> {{ item.description }}</p>
-                        <p class="card-text"><strong>Style:</strong> {{ item.predicted_style }}</p>
-                        <p class="card-text"><strong>Fine Category:</strong> {{ item.fine_category }}</p>
-                    </div>
-                    <div class="card-footer bg-white border-0 text-end">
-                        <a href="{% url 'delete_clothing' item.id %}" class="btn btn-outline-danger btn-sm">Delete</a>
-                    </div>
-                </div>
-            </div>
-        {% empty %}
-            <p class="text-muted">You haven't added any items yet.</p>
-        {% endfor %}
+    <!-- live preview -->
+    <div class="preview d-none" id="previewWrap">
+      <img id="previewImg" alt="preview">
     </div>
+  </form>
+
+  <!-- ===== Grid ===== -->
+  <div class="row g-3">
+    {% for item in items %}
+      <div class="col-6 col-md-4 col-lg-3 mb-4">
+        <div class="card h-100 shadow-sm">
+          <img src="{{ item.image.url }}" class="card-img-top" alt="Clothing image">
+          <div class="card-body">
+            <p class="card-text"><strong>Description:</strong> {{ item.description }}</p>
+            <p class="card-text"><strong>Style:</strong> {{ item.predicted_style }}</p>
+            <p class="card-text"><strong>Fine Category:</strong> {{ item.fine_category }}</p>
+          </div>
+          <div class="card-footer bg-white border-0 text-end">
+            <a href="{% url 'delete_clothing' item.id %}" class="btn btn-outline-danger btn-sm">Delete</a>
+          </div>
+        </div>
+      </div>
+    {% empty %}
+      <p class="text-muted">You haven't added any items yet.</p>
+    {% endfor %}
+  </div>
 </div>
 
 <style>
-    body {
-        background: linear-gradient(140deg, #FFF4E6 30%, #FFEADC 20%, #FFF8F0 60%);
-        position: relative;
-        overflow-x: hidden;
-    }
+  /* Page bg */
+  body{
+    background: linear-gradient(140deg, #FFF4E6 30%, #FFEADC 20%, #FFF8F0 60%);
+    position:relative; overflow-x:hidden;
+  }
+  .bg-shape{ position:absolute; border-radius:50%; filter:blur(100px); opacity:.4; z-index:0; }
+  .bg-shape1{ width:350px;height:350px;background:#FFD6A5;top:-120px;left:-100px; }
+  .bg-shape2{ width:300px;height:300px;background:#FFB5A7;bottom:-150px;right:-100px; }
+  .bg-shape3{ width:250px;height:250px;background:#FCD5CE;top:40%;left:60%; }
+  .container{ position:relative; z-index:1; }
 
-    /* Големи замаглени форми */
-    .bg-shape {
-        position: absolute;
-        border-radius: 50%;
-        filter: blur(100px);
-        opacity: 0.4;
-        z-index: 0;
-    }
+  /* Toolbar */
+  .page-head{ display:flex; align-items:center; justify-content:space-between; gap:12px; margin-bottom:14px; }
+  .page-title{ margin:0; font-weight:700; letter-spacing:.2px; }
+  .head-actions{ display:flex; gap:10px; flex-wrap:wrap; }
 
-    .bg-shape1 {
-        width: 350px; height: 350px;
-        background: #FFD6A5;
-        top: -120px; left: -100px;
-    }
+  /* Buttons */
+  .btn-accent{
+    background:#C68B59; color:#fff; border:none; border-radius:999px;
+    padding:10px 18px; font-weight:600; transition:.25s;
+  }
+  .btn-accent:hover{ background:#A97142; }
+  .btn-outline-primary{ border:2px solid #C68B59; color:#C68B59; border-radius:12px; }
+  .btn-outline-primary:hover{ background:#C68B59; color:#fff; }
 
-    .bg-shape2 {
-        width: 300px; height: 300px;
-        background: #FFB5A7;
-        bottom: -150px; right: -100px;
-    }
+  /* Upload card */
+  .upload-card{
+    display:grid;
+    grid-template-columns: 1fr 260px;
+    grid-template-rows: auto;
+    gap:16px;
+    background:#fff; border:1px solid #F1E7DC; border-radius:16px;
+    padding:14px; margin-bottom:18px;
+    box-shadow:0 2px 14px rgba(0,0,0,.05);
+  }
+  .dropzone{
+    display:flex; align-items:center; gap:12px;
+    border:2px dashed #EAD7C4; border-radius:12px; padding:12px 14px; cursor:pointer;
+    transition:.2s ease; min-height:64px;
+  }
+  .dropzone:hover{ border-color:#C68B59; background:#FFF8F0; }
+  .dropzone.ring{ border-color:#C68B59; box-shadow:0 0 0 4px rgba(198,139,89,.12) inset; }
+  .dz-icon{
+    width:44px;height:44px;border-radius:50%;
+    display:grid;place-items:center;background:#FFF1E2;color:#C68B59;font-size:22px;flex:0 0 auto;
+  }
+  .dz-title{ font-weight:600; color:#111827; }
+  .dz-sub{ color:#6B7280; font-size:.95rem; margin-top:2px; }
 
-    .bg-shape3 {
-        width: 250px; height: 250px;
-        background: #FCD5CE;
-        top: 40%;
-        left: 60%;
-    }
+  .upload-side{ display:flex; flex-direction:column; align-items:flex-end; justify-content:center; gap:10px; }
+  .file-line{ width:100%; text-align:right; }
+  .file-name{ color:#6B7280; font-size:.95rem; }
 
-    .container {
-        position: relative;
-        z-index: 1;
-    }
+  .preview{ grid-column:1 / -1; width:min(480px,100%); border:1px solid #eee; border-radius:12px; overflow:hidden; }
+  .preview img{ width:100%; height:260px; object-fit:cover; display:block; }
 
-    /* Слики */
-    .card-img-top {
-        height: 250px;
-        object-fit: cover;
-        border-radius: 10px;
-    }
+  /* Cards */
+  .card{ border-radius:15px; transition: all .3s ease; }
+  .card:hover{ transform: translateY(-5px); box-shadow:0 6px 20px rgba(0,0,0,.1); }
+  .card-img-top{ height:250px; object-fit:cover; border-radius:10px; display:block; width:100%; }
 
-    /* Hover ефект на картиците */
-    .card {
-        border-radius: 15px;
-        transition: all 0.3s ease;
-    }
-    .card:hover {
-        transform: translateY(-5px);
-        box-shadow: 0 6px 20px rgba(0,0,0,0.1);
-    }
-
-    /* Копчиња */
-    .btn-accent {
-        background: #C68B59;
-        color: white;
-        border-radius: 25px;
-        transition: 0.3s;
-        font-weight: 500;
-        border: none;
-    }
-    .btn-accent:hover {
-        background: #A97142;
-    }
-    .btn-outline-primary {
-        border: 2px solid #C68B59;
-        color: #C68B59;
-        border-radius: 10px;
-        transition: 0.3s;
-    }
-    .btn-outline-primary:hover {
-        background: #C68B59;
-        color: white;
-    }
-    footer {
-        background-color: #f9fafb;
-        color: var(--text-muted);
-        padding: 15px 0;
-        text-align: center;
-        font-size: 0.9rem;
-        border-top: 1px solid #e5e7eb;
-    }
+  /* Responsive */
+  @media (max-width: 768px){
+    .upload-card{ grid-template-columns: 1fr; }
+    .upload-side{ align-items:stretch; }
+    .file-line{ text-align:left; }
+  }
+  @media (max-width:576px){
+    .bg-shape{ display:none; }
+    .card-img-top{ height:200px; }
+    .preview img{ height:220px; }
+  }
+  @media (min-width:577px) and (max-width:991.98px){
+    .card-img-top{ height:230px; }
+  }
 </style>
 
+<script>
+  (function(){
+    const input  = document.getElementById('id_image');
+    const dz     = document.getElementById('dropZone');
+    const nameEl = document.getElementById('fileName');
+    const wrap   = document.getElementById('previewWrap');
+    const img    = document.getElementById('previewImg');
+    const submit = document.getElementById('submitBtn');
+
+    if(!input || !dz) return;
+    ['dragenter','dragover'].forEach(ev =>
+      dz.addEventListener(ev, e => { e.preventDefault(); dz.classList.add('ring'); })
+    );
+    ['dragleave','drop'].forEach(ev =>
+      dz.addEventListener(ev, e => { e.preventDefault(); dz.classList.remove('ring'); })
+    );
+    dz.addEventListener('drop', e => {
+      if(e.dataTransfer.files && e.dataTransfer.files[0]){
+        input.files = e.dataTransfer.files;
+        input.dispatchEvent(new Event('change', {bubbles:true}));
+      }
+    });
+
+    input.addEventListener('change', () => {
+      const file = input.files && input.files[0];
+      nameEl.textContent = file ? file.name : 'No image chosen';
+      if(!file){ wrap.classList.add('d-none'); return; }
+      img.src = URL.createObjectURL(file);
+      wrap.classList.remove('d-none');
+    });
+  })();
+</script>
+
+
 {% endblock %}
-
-
-
-{#<!-- templates/wardrobe.html -->#}
-{#{% extends 'base.html' %}#}
-{#{% load static %}#}
-{#{% block content %}#}
-{##}
-{#<div class="container my-5">#}
-{#  <h2 class="mb-4">My Digital Wardrobe</h2>#}
-{##}
-{#  <!-- Upload Form -->#}
-{#  <form method="post" enctype="multipart/form-data" class="mb-5">#}
-{#    {% csrf_token %}#}
-{#    <div class="row g-2 align-items-center">#}
-{#      <div class="col-auto">#}
-{#        {{ form.image.label_tag }}#}
-{#        {{ form.image }}#}
-{#      </div>#}
-{#      <div class="col-auto">#}
-{#        <button type="submit" class="btn btn-primary">Upload Clothing</button>#}
-{#      </div>#}
-{#    </div>#}
-{#  </form>#}
-{##}
-{#  <!-- Wardrobe Grid -->#}
-{#<div class="row row-cols-1 row-cols-md-2 row-cols-lg-3 row-cols-xxl-4 g-4">#}
-{#    {% for item in wardrobe %}#}
-{#      <div class="col">#}
-{#          <div class="card h-100 shadow-sm">#}
-{#            <div class="text-center" style="height: auto;">#}
-{#              <img src="{{ item.image.url }}" alt="Clothing image" class="img-fluid" style="max-height: 400px; object-fit: contain;">#}
-{#            </div>#}
-{#            <div class="card-body">#}
-{#              <p class="card-text"><strong>Description:</strong> {{ item.description }}</p>#}
-{#              <p class="card-text"><strong>Style:</strong> {{ item.predicted_style }}</p>#}
-{#            </div>#}
-{#            <div class="card-footer d-flex justify-content-between align-items-center">#}
-{#              <small class="text-muted">Added: {{ item.uploaded_at|date:"M d, Y H:i" }}</small>#}
-{#              <form method="post" action="{% url 'delete_clothing' item.id %}" onsubmit="return confirm('Are you sure you want to delete this item?');">#}
-{#                {% csrf_token %}#}
-{#                <button type="submit" class="btn btn-sm btn-danger">Delete</button>#}
-{#              </form>#}
-{#            </div>#}
-{#          </div>#}
-{#      </div>#}
-{#    {% empty %}#}
-{#      <div class="col">#}
-{#        <p>No clothing items added yet.</p>#}
-{#      </div>#}
-{#    {% endfor %}#}
-{#  </div>#}
-{#</div>#}
-{##}
-{#{% endblock %}#}
 
 </body>
 </html>

@@ -4,9 +4,7 @@
   <meta charset="UTF-8">
   <title>Calendar</title>
 
-  <!-- FullCalendar CSS -->
   <link href="https://cdn.jsdelivr.net/npm/fullcalendar@6.1.10/index.global.min.css" rel="stylesheet">
-  <!-- Tom Select CSS -->
   <link href="https://cdn.jsdelivr.net/npm/tom-select@2.3.1/dist/css/tom-select.css" rel="stylesheet">
 </head>
 <body>
@@ -17,7 +15,6 @@
 <div class="container" style="max-width:1100px; margin:24px auto;">
   <h2 class="fw-bold mb-3">Outfit Planner</h2>
 
-  <!-- Modal Add -->
   <div class="modal fade" id="planModal" tabindex="-1" aria-hidden="true">
     <div class="modal-dialog">
       <div class="modal-content">
@@ -33,7 +30,6 @@
               <input type="date" class="form-control" name="date" id="planDate" required>
             </div>
 
-            <!-- Dropdown со слики (Tom Select) -->
             <div class="mb-3">
               <label class="form-label">Outfit</label>
               <select class="form-select" name="outfit" id="planOutfit" required>
@@ -62,13 +58,10 @@
     </div>
   </div>
 
-  <!-- Calendar -->
   <div id="calendar"></div>
 </div>
 
-<!-- FullCalendar JS -->
 <script src="https://cdn.jsdelivr.net/npm/fullcalendar@6.1.10/index.global.min.js"></script>
-<!-- Tom Select JS -->
 <script src="https://cdn.jsdelivr.net/npm/tom-select@2.3.1/dist/js/tom-select.complete.min.js"></script>
 
 <style>
@@ -77,7 +70,6 @@
   .fc .fc-button-primary:hover{ background:#A97142; border-color:#A97142; }
 
 
-  /* ---- само слика во деновите ---- */
   #calendar .fc-daygrid-event,
   #calendar .fc-timegrid-event{
     background: transparent !important;
@@ -87,11 +79,11 @@
   #calendar .fc-event-title{ display:none; }
 
   .event-thumb{
-    width: 70px;       /* ширина */
-    height: 100px;     /* висина - како мини постер */
+    width: 70px;
+    height: 100px;
     border-radius: 12px;
     overflow: hidden;
-    margin: 0 auto;    /* центрирање */
+    margin: 0 auto;
     box-shadow: 0 2px 6px rgba(0,0,0,.15);
     border: 1px solid #eee;
   }
@@ -103,11 +95,29 @@
   }
   #calendar .fc-daygrid-day-events .fc-daygrid-event-harness{ margin: 3px 0; }
 
-  /* Toast преглед */
   .plan-card{ display:flex; align-items:center; gap:10px; padding:6px 8px; background:#fff; border:1px solid #eee; border-radius:10px; }
   .plan-card img{ width:100px; height:140px; object-fit:cover; border-radius:8px; }
   .plan-card .meta{ font-size:12px; color:#555; }
   .toast{ position: fixed; right:16px; bottom:16px; z-index:1080; }
+
+
+    @media (max-width: 768px){
+      #calendar .fc-header-toolbar{
+        flex-wrap:wrap;
+        row-gap:6px;
+      }
+      #calendar .fc-toolbar-title{ font-size:1.1rem; }
+
+      .event-thumb{ width:54px; height:80px; border-radius:10px; }
+      #calendar .fc-daygrid-day-events .fc-daygrid-event-harness{ margin:2px 0; }
+
+      .fc .fc-button{ padding:4px 8px; font-size:.9rem; }
+    }
+
+    @media (max-width: 360px){
+      .event-thumb{ width:48px; height:70px; }
+    }
+
 </style>
 
 <script>

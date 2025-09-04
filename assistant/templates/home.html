@@ -18,117 +18,78 @@
         gap: 60px;
         flex-wrap: wrap;
         position: relative;
-        min-height: calc(90vh - 180px); /* 100vh minus navbar + footer height */
+        min-height: calc(90vh - 180px);
+        text-align: center;
     }
 
-    .circle-bg {
-        position: absolute;
-        border-radius: 50%;
-        z-index: 0;
-        opacity: 0.15;
-    }
+    .circle-bg { position: absolute; border-radius: 50%; z-index: 0; opacity: 0.15; }
+    .circle-left { width: 400px; height: 400px; background-color: #f6d7b0; left: 5%; top: 50%; transform: translateY(-50%); }
+    .circle-right { width: 400px; height: 400px; background-color: #f6d7b0; right: 5%; top: 50%; transform: translateY(-50%); }
 
-    .circle-left {
-        width: 400px;
-        height: 400px;
-        background-color: #f6d7b0;
-        left: 5%;
-        top: 50%;
-        transform: translateY(-50%);
-    }
-
-    .circle-right {
-        width: 400px;
-        height: 400px;
-        background-color: #f6d7b0;
-        right: 5%;
-        top: 50%;
-        transform: translateY(-50%);
-    }
-
-    .hero-image {
-        flex: 1 1 300px;
-        display: flex;
-        justify-content: center;
-        z-index: 1;
-    }
-
+    .hero-image { flex: 1 1 300px; display: flex; justify-content: center; z-index: 1; }
     .hero-image img {
-        width: 300px;
-        height: 400px;
-        object-fit: cover;
+        width: 300px; height: 400px; object-fit: cover;
         border-radius: 50% / 40%;
         border: 8px solid white;
         box-shadow: 0 4px 20px rgba(0,0,0,0.15);
     }
+    .hero-image img:hover { transform: scale(1.03); transition: transform 0.3s ease; }
 
-    .hero-image img:hover {
-        transform: scale(1.03);
-        transition: transform 0.3s ease;
-    }
-
-
-    .hero-text {
-        flex: 1 1 500px;
-        max-width: 500px;
-        text-align: center;
-        z-index: 1;
-    }
-
-    .hero-text h1 {
-        font-size: 3.8rem;
-        font-weight: 800;
-        margin-bottom: 15px;
-        color: #14213D;
-    }
-
-    .hero-text p {
-        font-size: 1.15rem;
-        color: #6B7280;
-        line-height: 1.6;
-        margin-bottom: 25px;
-    }
-
+    .hero-text { flex: 1 1 500px; max-width: 500px; z-index: 1; }
+    .hero-text h1 { font-size: 3.5rem; font-weight: 800; margin-bottom: 15px; color: #14213D; }
+    .hero-text p { font-size: 1.15rem; color: #6B7280; line-height: 1.6; margin-bottom: 25px; }
 
     .btn-profile {
         background:#C68B59;
         border: none;
-        border-radius: 25px;
-        padding: 12px 30px;
+        border-radius: 40px;
+        padding: 16px 50px;
         font-weight: 600;
         color: white !important;
-        transition: background-color 0.3s ease;
-        font-size: 1rem;
-        text-decoration: none;
-    }
-
-
-    .btn-register {
-        background: none;
-        border: none;
-        color: #264653;
         font-size: 1.1rem;
-        font-weight: 600;
-        text-decoration: none; /* 🔹 Тука го тргаме underline */
-        cursor: pointer;
-        padding: 0;
+        text-decoration: none;
+        display: inline-block;
+        min-width: 200px;
+        text-align: center;
+        transition: all 0.3s ease;
     }
+    .btn-profile:hover { background:#A97142; transform: scale(1.05); }
 
-    .btn-register:hover {
-        color: #14213D;
-        text-decoration: underline; /* 🔹 Ако сакаш underline само при hover */
-    }
-
-
-    @media (max-width: 992px) {
-        .hero-section {
-            flex-direction: column;
-            gap: 40px;
-        }
-        .circle-left, .circle-right {
-            display: none;
+    @media (max-width: 576px) {
+        .btn-profile {
+            width: 100%;
+            padding: 14px;
+            font-size: 1.1rem;
+            min-width: unset;
         }
     }
+
+    @media (max-width: 640px){
+      .hero-section{
+        min-height: auto;
+        justify-content: flex-start;
+        gap: 40px;
+        padding-top: 24px;
+        padding-bottom: 24px;
+      }
+      .hero-text p{
+        margin-bottom: 20px;
+      }
+      .hero-section .hero-image:last-of-type{
+        margin-top: -10px;
+      }
+        .circle-left, .circle-right { display: none; }
+
+    }
+
+    @media (min-width: 993px){
+      .hero-image--right{ margin-left: -50px; }
+    }
+
+    @media (max-width: 992px){
+      .hero-image--right{ margin-top: -14px; }
+    }
+
 </style>
 
 <div class="container hero-section">
@@ -151,11 +112,10 @@
         {% endif %}
     </div>
 
-    <div class="hero-image">
+    <div class="hero-image hero-image--right">
         <img src="{% static 'images/male-model.jpg' %}" alt="Male Fashion">
     </div>
 </div>
 {% endblock %}
-
 </body>
 </html>

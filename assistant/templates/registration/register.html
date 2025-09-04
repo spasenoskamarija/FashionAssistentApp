@@ -134,6 +134,21 @@
             top: 40%;
             left: 60%;
         }
+
+        @media (max-width: 768px){
+          .page-wrapper{ height:auto; padding:20px 12px; }
+          .login-container{ width:100%; max-width:560px; flex-direction:column; }
+          .login-right{ padding:22px 18px; }
+          .form-group input{ width:100%; }
+          .login-left{ padding:18px 12px; }
+          .login-left img{ width:70%; max-width:220px; }
+          .bg-shape{ display:none; }
+        }
+
+        @media (max-width: 360px){
+          .login-right h2{ font-size:22px; }
+        }
+
 </style>
 
 <div class="page-wrapper">

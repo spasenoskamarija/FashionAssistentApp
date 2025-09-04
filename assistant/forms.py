@@ -16,7 +16,7 @@ class UserRegisterForm(UserCreationForm):
 class ProfileForm(forms.ModelForm):
     class Meta:
         model = Profile
-        fields = ['profile_picture']  # <-- add gender
+        fields = ['profile_picture', 'gender']
 
 class ClothingItemForm(forms.ModelForm):
     class Meta:
