@@ -98,10 +98,11 @@ def profile(request):
     top_rating = outfits.aggregate(max_rating=Max('rating'))['max_rating']
     top_rated_outfits = outfits.filter(rating=top_rating) if top_rating else []
 
-    # Chart is computed from ClothingItem (kept)
     style_stats = (
-        ClothingItem.objects
+        UserOutfit.objects
         .filter(profile=profile)
+        .exclude(predicted_style__isnull=True)
+        .exclude(predicted_style__exact="")
         .values('predicted_style')
         .annotate(count=Count('predicted_style'))
         .order_by('-count')
