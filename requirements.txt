@@ -1,2 +1,21 @@
-transformers>=4.30.0
+# Django framework
+Django>=4.2
+pillow>=9.0.0   # за работа со слики (ImageField, PIL)
+
+# ML / AI libraries
 torch>=2.0.0
+torchvision>=0.15.0
+torchaudio>=2.0.0
+transformers>=4.30.0
+sentence-transformers>=2.2.2
+ultralytics>=8.0.0  # YOLOv8
+
+# Utils
+opencv-python>=4.7.0.72
+numpy
+scipy
+tqdm
+
+# Optional but recommended
+django-widget-tweaks>=1.5.0   # ако го користиш во template-ите
+python-dotenv>=1.0.0          # ако имаш .env

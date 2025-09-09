@@ -2,10 +2,10 @@ __pycache__/
 *.py[cod]
 
 *.sqlite3
-
 *.log
 
-media/
+media/*
+!media/**/.gitkeep
 
 .venv/
 env/
@@ -14,3 +14,4 @@ env/
 .vscode/
 
 *.pt
+!assistant/yolov8s-seg.pt
