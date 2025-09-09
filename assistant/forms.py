@@ -27,6 +27,10 @@ class UserOutfitForm(forms.ModelForm):
     class Meta:
         model = UserOutfit
         fields = ['image', 'rating', 'favorite']
+        widgets = {
+            'rating': forms.NumberInput(attrs={'min': 1, 'max': 5}),
+        }
+
 
 class OutfitPlanForm(forms.ModelForm):
     date = forms.DateField(widget=forms.DateInput(attrs={'type': 'date'}))

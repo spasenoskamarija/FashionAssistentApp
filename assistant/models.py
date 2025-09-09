@@ -1,4 +1,5 @@
 # models.py
+from django.core.validators import MinValueValidator, MaxValueValidator
 from django.db import models
 from django.contrib.auth.models import User
 
@@ -36,7 +37,10 @@ class UserOutfit(models.Model):
     predicted_style = models.CharField(max_length=100)
     detected_labels = models.TextField()
     fine_category = models.CharField(max_length=100)
-    rating = models.IntegerField(default=0)
+    rating = models.IntegerField(
+        default=1,
+        validators=[MinValueValidator(1), MaxValueValidator(5)]
+    )
     favorite = models.BooleanField(default=False)
 
     def __str__(self):
