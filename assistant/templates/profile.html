@@ -19,6 +19,7 @@
       <form id="avatarForm" method="post" enctype="multipart/form-data" action="{% url 'profile' %}">
         {% csrf_token %}
         <input type="hidden" name="form_kind" value="avatar">
+        <input type="hidden" name="gender" value="{{ profile.gender }}">
         <input class="d-none" type="file" name="profile_picture" id="avatarInput" accept="image/*"
                onchange="document.getElementById('avatarForm').submit();" />
         <button type="button" class="avatar-frame" title="Change photo"
