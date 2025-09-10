@@ -45,7 +45,6 @@ def profile(request):
                 if profile.profile_picture:
                     image_path = profile.profile_picture.path
                     description = describe_outfit(image_path)
-                    # keep your original "predicted_style" text for the profile picture
                     style = classify_style_from_text(description)
                     profile.predicted_style = f"{description} ⟶ {style}"
                     profile.save()
