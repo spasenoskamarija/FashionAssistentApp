@@ -1,1 +1,0 @@
-web: gunicorn FashionAssistentApp.wsgi:application
