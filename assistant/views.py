@@ -36,7 +36,7 @@ def profile(request):
     if request.method == 'POST':
         kind = request.POST.get('form_kind')
 
-        # === Avatar/Profile form ===
+        # === Profile form ===
         if kind == 'avatar':
             form = ProfileForm(request.POST, request.FILES, instance=profile)
             outfit_form = UserOutfitForm()
@@ -75,7 +75,7 @@ def profile(request):
                     categories = [fallback] if fallback else ["Unknown"]
                 outfit.fine_category = ", ".join(categories)
 
-                # NEW: CLIP-based style prediction (robust)
+                # CLIP-based style prediction
                 style = predict_style(img, description, labels)
                 outfit.predicted_style = style
 
@@ -153,7 +153,7 @@ def wardrobe(request):
                 categories = [fallback] if fallback else ["Unknown"]
             item.fine_category = ", ".join(categories)
 
-            # NEW: CLIP-based style prediction for wardrobe items too
+            # CLIP-based style prediction for wardrobe items too
             item.predicted_style = predict_style(image, description, labels)
 
             item.save()

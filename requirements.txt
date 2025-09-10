@@ -1,6 +1,6 @@
 # Django framework
 Django>=4.2
-pillow>=9.0.0   # за работа со слики (ImageField, PIL)
+pillow>=9.0.0
 
 # ML / AI libraries
 torch>=2.0.0

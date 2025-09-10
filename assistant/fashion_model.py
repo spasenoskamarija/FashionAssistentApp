@@ -10,11 +10,11 @@ processor = BlipProcessor.from_pretrained("Salesforce/blip-image-captioning-base
 blip_model = BlipForConditionalGeneration.from_pretrained("Salesforce/blip-image-captioning-base")
 blip_model.to(torch.device("cuda" if torch.cuda.is_available() else "cpu"))
 
-# SentenceTransformer (kept; used elsewhere)
+# SentenceTransformer
 style_labels = ["casual", "elegant", "sporty", "boho", "grunge", "streetwear", "chic"]
 embedder = SentenceTransformer("sentence-transformers/paraphrase-MiniLM-L6-v2")
 
-# YOLO object detector
+# YOLO
 yolo_model = YOLO("yolov8s-seg.pt")
 
 # Category mapping
@@ -112,8 +112,7 @@ def categorize_from_caption(caption):
                 return category
     return "Unknown"
 
-# NEW: CLIP Zero-shot Style Classifier (+ heuristics)
-
+# CLIP Zero-shot Style Classifier (+ heuristics)
 from transformers import CLIPProcessor, CLIPModel
 _device = torch.device("cuda" if torch.cuda.is_available() else "cpu")
 clip_model = CLIPModel.from_pretrained("openai/clip-vit-large-patch14").to(_device)

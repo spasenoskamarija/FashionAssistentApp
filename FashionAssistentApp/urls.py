@@ -21,9 +21,9 @@ from django.contrib.auth.views import LogoutView
 from django.urls import path, include
 
 urlpatterns = [
-    path('admin/', admin.site.urls),  # Admin Panel
-    path('', include('assistant.urls')),  # Важи за твојата апликација
-    path('accounts/', include('django.contrib.auth.urls')),  # Вградените login/logout
+    path('admin/', admin.site.urls),
+    path('', include('assistant.urls')),
+    path('accounts/', include('django.contrib.auth.urls')),
 
 path('accounts/logout/', LogoutView.as_view(), name='logout')
 ]

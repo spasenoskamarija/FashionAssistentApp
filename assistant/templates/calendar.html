@@ -133,7 +133,6 @@ document.addEventListener('DOMContentLoaded', function() {
   const form = document.getElementById('planForm');
   const dateInput = document.getElementById('planDate');
 
-  // FullCalendar init
   const calendar = new FullCalendar.Calendar(calendarEl, {
     initialView: 'dayGridMonth',
     height: 'auto',
@@ -193,7 +192,6 @@ document.addEventListener('DOMContentLoaded', function() {
 
   calendar.render();
 
-  // Submit add
   form.addEventListener('submit', async (e)=>{
     e.preventDefault();
     const fd = new FormData(form);
@@ -208,7 +206,6 @@ document.addEventListener('DOMContentLoaded', function() {
     }
   });
 
-  // Tom Select init
   new TomSelect("#planOutfit", {
     render: {
       option: function(data, escape) {

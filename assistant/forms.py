@@ -31,7 +31,6 @@ class UserOutfitForm(forms.ModelForm):
             'rating': forms.NumberInput(attrs={'min': 1, 'max': 5}),
         }
 
-
 class OutfitPlanForm(forms.ModelForm):
     date = forms.DateField(widget=forms.DateInput(attrs={'type': 'date'}))
     class Meta:

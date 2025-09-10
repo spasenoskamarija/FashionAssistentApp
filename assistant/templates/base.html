@@ -25,7 +25,6 @@
     }
     body{ display:flex; flex-direction:column; min-height:100vh; }
 
-    /* Smooth transitions */
     html, body, .card, nav.navbar, footer, .btn, .form-control, .form-select,
     .dropdown-menu, .modal-content, .carousel, .carousel-item {
       transition: background-color .25s ease, color .25s ease, border-color .25s ease, background .25s ease;
@@ -42,7 +41,6 @@
     .nav-link{ color:var(--primary) !important; font-weight:500; margin-left:25px; transition:color .3s ease; }
     .nav-link:hover{ color:var(--accent) !important; }
 
-    /* Buttons */
     .btn-accent{
       background:#C68B59; color:#fff; border:none;
       border-radius:999px; padding:8px 18px; font-weight:600; transition:all .25s ease;
@@ -100,7 +98,7 @@
               </li>
         {% else %}
           <li class="nav-item"><a class="nav-link" href="{% url 'login' %}">Login</a></li>
-          <li class="nav-item"><a class="btn-accent ms-2" href="{% url 'register' %}">Register</a></li>
+          <li class="nav-item"><a class="btn-accent ms-2" style="text-decoration: none" href="{% url 'register' %}">Register</a></li>
         {% endif %}
       </ul>
     </div>
