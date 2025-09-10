@@ -16,3 +16,4 @@ scipy
 tqdm
 
 whitenoise>=6.6.0
+gunicorn>=21.0
